@@ -8,9 +8,7 @@
     <title>Test</title>
 
     <!-- Sb Admin Bootstrap css -->
-    <!-- TODO: Pake lokal -->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <link href="../../../public/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Fonts -->
     <link
