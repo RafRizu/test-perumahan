@@ -26,7 +26,10 @@
 </head>
 
 <body class="bg-gray-100 @stack('body-class')">
- @include('partials.navbar')
+    @auth
+
+    @include('partials.navbar')
+    @endauth
     @yield('content')
 
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">
