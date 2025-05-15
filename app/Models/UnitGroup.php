@@ -10,4 +10,8 @@ class UnitGroup extends Model
     protected $table = 'unit_groups';
 
     public $timestamps = false;
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }

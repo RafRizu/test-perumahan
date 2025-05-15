@@ -10,4 +10,8 @@
     </div>
     @endif
     <p>ini auran</p>
+    <p>
+        {{ Auth::user()->referral ? Auth::user()->referral->id : 'No referral' }}
+    </p>
+
 @endsection
