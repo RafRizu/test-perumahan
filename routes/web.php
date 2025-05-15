@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\AccountController;
 
 Route::redirect('/', '/login');
@@ -20,4 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/marketing/store', [AccountController::class, 'storeMarketing'])->name('marketing.store');
     Route::get('/referral/create', [AccountController::class, 'indexReferral'])->name('referral.create');
     Route::post('/referral/store', [AccountController::class, 'storeReferral'])->name('referral.store');
+
+    Route::get('/unit-group', [UnitController::class, 'index'])->name('unit-group.index');
+    Route::get('/unit/{unitGroupId}', [UnitController::class, 'indexUnit'])->name('unit.index');
+
 });
