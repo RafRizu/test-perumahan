@@ -9,5 +9,5 @@
         </ul>
     </div>
     @endif
-    <p>test</p>
+    <p>ini auran</p>
 @endsection
