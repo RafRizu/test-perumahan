@@ -26,7 +26,24 @@
 </head>
 
 <body class="bg-gray-100 @stack('body-class')">
+ @include('partials.navbar')
     @yield('content')
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ready to Logout?</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close"><span>×</span></button>
+                </div>
+                <div class="modal-body">Klik "Logout" untuk mengakhiri sesi kamu saat ini.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Jquery 3.6.0  -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>

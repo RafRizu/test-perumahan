@@ -1,0 +1,33 @@
+.navbar-custom {
+    background-color: #0095e0;
+}
+
+.nav-link,
+.dropdown-toggle {
+    color: white !important;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.dropdown-menu {
+    min-width: 150px;
+}
+
+.user-text {
+    margin-right: 10px;
+}
+
+.navbar-divider {
+    height: 40px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto 15px;
+}
+
+.navbar-brand img {
+    max-height: 20px;
+    width: 20px;
+}

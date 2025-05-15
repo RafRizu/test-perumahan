@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container d-flex flex-wrap">
         @foreach ($unitGroups as $unitGroup)
         <a href="{{route('unit.index',['unitGroupId'=>$unitGroup->id])}}">
