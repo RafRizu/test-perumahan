@@ -11,9 +11,13 @@ class Unit extends Model
 
     public $timestamps = false;
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(Customer::class, 'id');
+        return $this->hasMany(Customer::class);
+    }
+    public function unitGroup()
+    {
+        return $this->belongsTo(UnitGroup::class);
     }
 
 }

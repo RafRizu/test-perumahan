@@ -20,4 +20,9 @@ class User extends Authenticatable
 
     public $timestamps = false;
 
+    public function referral()
+    {
+        return $this->hasOne(Referral::class,'user_id','id');
+    }
+
 }

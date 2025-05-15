@@ -17,8 +17,8 @@ class UnitController extends Controller
     }
     public function indexUnit($unitGroupId)
     {
-        $units = Unit::where('unit_group_id', $unitGroupId)->with('customer')->get();
-        $customer = Customer::all();
-        return view('pages.unit', compact('units', 'customer'));
+        $units = Unit::where('unit_group_id', $unitGroupId)->with('customers')->get();
+        // $customer = Customer::all();
+        return view('pages.unit', compact('units', ));
     }
 }
