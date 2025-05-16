@@ -37,7 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.js') }}"></script>
 
     <!-- WARNING: For chart later: Page level plugins -->
     <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
