@@ -17,8 +17,13 @@ a {
 
 // Main page wrapper
 #wrapper {
-  display: flex;
+  display: grid;
+  grid-template-areas:
+        "sidebar topbar"
+        "sidebar content";
   #content-wrapper {
+    grid-area: content;
+    z-index: -1;
     background-color: $gray-100;
     width: 100%;
     overflow-x: hidden;
