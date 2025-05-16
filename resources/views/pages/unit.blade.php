@@ -1,39 +1,43 @@
 @extends('layouts.app')
+
 @section('content')
-    <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>No. </th>
-                    <th>Nama</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($units as $unit)
+<div class="d-flex justify-content-center" style="margin-top: 80px;">
+    <div class="card shadow" style="width: 100%; max-width: 700px;">
+        <div class="card-body">
+            <h4 class="text-muted fw-bold">Modal</h4>
+            <table class="table table-bordered text-center mt-3">
+                <thead class="bg-light">
                     <tr>
-                        <td>{{ $unit->name }}</td>
-                        @forelse ($unit->customers as $customer)
-                            <td>{{ $customer->name }}</td>
-                        @empty
-                            <td>Kosong</td>
-                        @endforelse
-
-
-                        @if (isset($customer->id))
-                        <td>
-                            <a href="{{ route('customer.detail', $customer->id) }}" class="btn btn-primary">Detail</a>
-                        </td>
-                        @else
-                            <td>
-                                <a href="{{ route('customer.create') }}" class="btn btn-sm btn-primary">Add Customer</a>
-                            </td>
-                        @endif
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-            </tr>
-        </table>
-        <a href="{{ route('unit-group.index') }}" class="btn btn-sm btn-primary">Kembali</a>
+                </thead>
+                <tbody>
+                    @php $no = 1; @endphp
+                    @foreach ($units as $unit)
+                        @forelse ($unit->customers as $customer)
+                            <tr>
+                                <td>{{ $no++ }}.</td>
+                                <td class="fw-semibold">{{ $customer->name }}</td>
+                                <td>
+                                    <a href="{{ route('customer.detail', $customer->id) }}" class="btn btn-success btn-sm">Detail</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td>{{ $no++ }}.</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        @endforelse
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="text-start mt-3">
+                <a href="{{ route('unit-group.index') }}" class="btn btn-primary btn-sm">Kembali</a>
+            </div>
+        </div>
     </div>
+</div>
 @endsection
