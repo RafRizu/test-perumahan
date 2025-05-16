@@ -3,6 +3,24 @@
 @section('content')
 
     <div class="container d-flex flex-wrap">
+        <div class="mb-3 col-12">
+            <div class="row-2">
+                Jumlah Unit
+                {{$unit}}
+            </div>
+            <div class="row-2">
+                Jumlah Booking
+                {{$customerBooked}}
+            </div>
+            <div class="row-2">
+                Jumlah Order
+                {{$customerOrdered}}
+            </div>
+            <div class="row-2">
+                Jumlah Unit Tersedia
+                {{$avalaibleUnits}}
+            </div>
+        </div>
         @foreach ($unitGroups as $unitGroup)
         <a href="{{route('unit.index',['unitGroupId'=>$unitGroup->id])}}">
 

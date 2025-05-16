@@ -29,6 +29,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/customer/create', [CustomerController::class, 'index'])->name('customer.create');
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('/customer/update/{id}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+    Route::get('/customer/detail/{id}', [CustomerController::class, 'show'])->name('customer.detail');
     Route::get('/api/unit-groups/{id}/units', [CustomerController::class, 'getUnits']);
+
 
 });

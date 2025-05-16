@@ -13,7 +13,13 @@ class UnitController extends Controller
     public function index()
     {
         $unitGroups = UnitGroup::all();
-        return view('pages.unit-group', compact('unitGroups'));
+        $unitGroupsCount = UnitGroup::all()->count();
+        $unit = Unit::all()->count();
+        $customerBooked = Customer::where('status','Booked')->get()->count();
+        $customerOrdered = Customer::where('status','Ordered')->get()->count();
+        $customer = Customer::all()->count();
+        $avalaibleUnits = $unit - $customer;
+        return view('pages.unit-group', compact('unitGroups', 'customerBooked', 'unit', 'customerOrdered', 'customer', 'avalaibleUnits', 'unitGroupsCount'));
     }
     public function indexUnit($unitGroupId)
     {

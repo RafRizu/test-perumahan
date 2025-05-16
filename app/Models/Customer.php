@@ -29,7 +29,7 @@ class Customer extends Model
     {
         return $this->belongsTo(Unit::class);
     }
-
+    
     // Relasi ke Referral
     public function referral()
     {

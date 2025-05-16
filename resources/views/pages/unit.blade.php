@@ -18,9 +18,17 @@
                         @empty
                             <td>Kosong</td>
                         @endforelse
+
+
+                        @if (isset($customer->id))
                         <td>
-                            <a href="" class="btn btn-primary">Detail</a>
+                            <a href="{{ route('customer.detail', $customer->id) }}" class="btn btn-primary">Detail</a>
                         </td>
+                        @else
+                            <td>
+                                <a href="{{ route('customer.create') }}" class="btn btn-sm btn-primary">Add Customer</a>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
