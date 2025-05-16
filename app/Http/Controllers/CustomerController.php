@@ -57,4 +57,5 @@ class CustomerController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Customer created successfully.');
     }
+
 }

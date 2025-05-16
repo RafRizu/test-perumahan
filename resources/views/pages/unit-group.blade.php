@@ -1,19 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container-fluid">
+    <h3 class="text-muted mt-4">Data Customers</h3>
 
-    <div class="container d-flex flex-wrap">
+    <div class="d-flex flex-wrap justify-content-center gap-4 my-4 fw-bold fs-5">
+        <div class="px-1">Unit Tersedia : 500 Unit</div>
+        <div class="px-1">Unit Booking : 80 Unit</div>
+        <div class="px-1">Unit Order : 90 Unit</div>
+        <div class="px-1">Unit Kosong :  100 Unit</div>
+    </div>
+
+    <div class="container d-flex flex-wrap justify-content-center">
         @foreach ($unitGroups as $unitGroup)
-        <a href="{{route('unit.index',['unitGroupId'=>$unitGroup->id])}}">
-
-            <div class="box mx-2 my-2 bg-primary p-2 d-flex align-items-center justify-content-center text-center"
-                 id="unit-group-{{ $unitGroup->id }}"
-                 style="width: 113px; height: 106px;border-radius: 10px; cursor: pointer;">
-                <div class="box-header text-center w-100">
-                    <h3 class="box-title m-0 text-light" style="font-size: 1.5rem;">{{ $unitGroup->name }}</h3>
+            <a href="{{ route('unit.index', ['unitGroupId' => $unitGroup->id]) }}">
+                <div class="box mx-2 my-2 bg-primary p-2 d-flex align-items-center justify-content-center text-center"
+                    id="unit-group-{{ $unitGroup->id }}"
+                    style="width: 113px; height: 106px; border-radius: 10px; cursor: pointer;">
+                    <div class="box-header text-center w-100">
+                        <h3 class="box-title m-0 text-light" style="font-size: 1.5rem;">
+                            {{ $unitGroup->name }}
+                        </h3>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
         @endforeach
+    </div>
     </div>
 @endsection
