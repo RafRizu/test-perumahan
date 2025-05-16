@@ -33,13 +33,26 @@
                 <select class="form-select" id="payment_status" name="payment_status" required>
                     <option value="">Select Status</option>
                     <option value="reject">Reject</option>
-                    <option value="solution">Solution</option>
                     <option value="qualify">Qualify</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="">Select Status</option>
+                    <option value="Booked">Booking</option>
+                    <option value="Order">Order</option>
                 </select>
             </div>
             <div class="mb-3" id="solution_box" style="display: none;">
                 <label for="solution" class="form-label">Solution</label>
-                <textarea class="form-control" id="solution" name="solution"></textarea>
+                <select name="solution" id="solution" class="form-select">
+                    <option value="">Select Solution</option>
+                    <option value="Takeover Bank">Takeover Bank</option>
+                    <option value="Clearing Payment">Clearing Payment</option>
+                    <option value="Change Credit Name">Change Credit Name</option>
+                    <option value="Repayment">Repayment</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="unit_group_id" class="form-label">Unit Group</label>
