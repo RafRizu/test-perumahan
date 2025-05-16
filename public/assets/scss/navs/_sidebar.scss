@@ -298,6 +298,10 @@
             text-align: left;
         }
 
+        &.toggled-md {
+          min-width: $sidebar-base-width;
+        }
+
         &.toggled {
             overflow: visible;
             min-width: $sidebar-collapsed-width !important;
