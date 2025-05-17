@@ -6,18 +6,21 @@ use App\Models\Unit;
 use App\Models\Customer;
 use App\Models\UnitGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
     //
     public function index()
     {
+        $user = Auth::user();
         $unit_groups = UnitGroup::all();
         // $referral_id = auth()->user()->with('referral')->get();
-        return view('forms.create-customer', compact('unit_groups', ));
+        return view('forms.create-customer', compact('unit_groups', 'user'));
     }
     public function getUnits($id)
     {
+
         $unit = Unit::where('unit_group_id', $id)->get();
         // dd($unit);
         return response()->json($unit);
@@ -60,16 +63,18 @@ class CustomerController extends Controller
 
     public function show($id)
     {
+        $user = Auth::user();
         $customer = Customer::with('unit')->findOrFail($id);
         $unit = Unit::with('unitGroup')->findOrFail($customer->unit_id);
         $unit_group = UnitGroup::findOrFail($unit->unit_group_id);
-        return view('pages.detail-customer', compact('customer', 'unit', 'unit_group'));
+        return view('pages.detail-customer', compact('customer', 'unit', 'unit_group', 'user'));
     }
     public function edit($id)
     {
+        $user = Auth::user();
         $customer = Customer::findOrFail($id);
         $unit_groups = UnitGroup::all();
-        return view('forms.edit-customer', compact('customer', 'unit_groups'));
+        return view('forms.edit-customer', compact('customer', 'unit_groups', 'user'));
     }
     public function update(Request $request, $id)
     {

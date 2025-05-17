@@ -10,7 +10,9 @@
             <li class="nav-item mx-2"><a class="nav-link" href="{{route('unit-group.index')}}">Data Customers</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="{{route('marketing.create')}}">Add Marketing Team</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="{{route('referral.create')}}">Add Referrals</a></li>
+              @if ($user->role == "referral")
             <li class="nav-item mx-2"><a class="nav-link" href="{{route('customer.create')}}">Add Customers</a></li>
+            @endif
         </ul>
     </div>
 

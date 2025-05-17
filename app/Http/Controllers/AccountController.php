@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MarketingTeam;
-use App\Models\Referral;
 use App\Models\User;
+use App\Models\Referral;
 use Illuminate\Http\Request;
+use App\Models\MarketingTeam;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
@@ -14,8 +15,10 @@ class AccountController extends Controller
     //
     public function indexMarketing()
     {
-        return view('forms.create-marketing');
+        $user = Auth::user();
+        return view('forms.create-marketing', compact('user'));
     }
+
     public function storeMarketing(Request $request)
     {
         // Only admin can access
@@ -62,8 +65,9 @@ class AccountController extends Controller
 
     public function indexReferral()
     {
+        $user = Auth::user();
         $marketing = MarketingTeam::all();
-        return view('forms.create-referral', compact('marketing'));
+        return view('forms.create-referral', compact('marketing', 'user'));
 
     }
     public function storeReferral(Request $request)
