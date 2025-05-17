@@ -60,10 +60,17 @@ class AccountController extends Controller
     }
 
 
+    public function listReferral() {
+        $user = auth()->user();
+        $referrals = Referral::all();
+        return view('list.referrals', compact('user', 'referrals'));
+    }
+
     public function indexReferral()
     {
         $marketing = MarketingTeam::all();
-        return view('forms.create-referral', compact('marketing'));
+        $user = auth()->user();
+        return view('forms.create-referral', compact('marketing', 'user'));
 
     }
     public function storeReferral(Request $request)
@@ -100,13 +107,13 @@ class AccountController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('dashboard')->with('success', 'Akun referral berhasil dibuat.');
+            return redirect()->route('referral')->with('success', 'Akun referral berhasil dibuat.');
         } catch (\Exception $e) {
             DB::rollBack();
             // Optional: log error
             // \Log::error('referral account creation failed', ['error' => $e->getMessage()]);
 
-            return redirect()->route('dashboard')->with('error', 'Gagal membuat akun referral: ' . $e->getMessage());
+            return redirect()->route('referral')->with('error', 'Gagal membuat akun referral: ' . $e->getMessage());
         }
     }
 

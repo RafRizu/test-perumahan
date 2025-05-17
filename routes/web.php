@@ -9,7 +9,7 @@ Route::redirect('/', '/login');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/marketing/create', [AccountController::class, 'indexMarketing'])->name('marketing.create');
     Route::post('/marketing/store', [AccountController::class, 'storeMarketing'])->name('marketing.store');
+    Route::get('/referral', [AccountController::class, 'listReferral'])->name('referral');
     Route::get('/referral/create', [AccountController::class, 'indexReferral'])->name('referral.create');
     Route::post('/referral/store', [AccountController::class, 'storeReferral'])->name('referral.store');
 });
