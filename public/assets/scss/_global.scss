@@ -18,6 +18,8 @@ a {
 // Main page wrapper
 #wrapper {
   display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
   grid-template-areas:
         "sidebar topbar"
         "sidebar content";
@@ -28,7 +30,7 @@ a {
     width: 100%;
     overflow-x: hidden;
     #content {
-      flex: 1 0 auto;
+      // flex: 1 0 auto;
     }
   }
 }
