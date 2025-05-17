@@ -19,8 +19,9 @@ return new class extends Migration
             $table->bigInteger('partner_national_id');
             $table->date('birth_date');
             $table->date('partner_birth_date');
-            $table->enum('payment_status', ['reject', 'solution', 'qualify']);
-            $table->text('solution')->nullable();
+            $table->enum('payment_status', ['reject', 'qualify']);
+            $table->enum('status', ['booked', 'ordered']);
+            $table->enum('solution',['Takeover Bank', 'Clearing Payment','Change Credit Name','Repayment'])->nullable();
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('referral_id')->constrained('referrals')->onDelete('cascade');
         });

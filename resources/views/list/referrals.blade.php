@@ -1,111 +1,78 @@
 @extends('layouts.app')
 @section('content')
-<!-- Page Wrapper -->
-<div id="wrapper">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-    @include('partials.sidebar')
-
-    @include('partials.topbar')
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Error!</strong> {{ $error }}
-                </div>
-                @endforeach
-                @endif
-
-                @if (session()->has('success'))
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Success!</strong> {{ session()->get('success') }}
-                </div>
-                @endif
-
-
-                <!-- Page Heading -->
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Referrals</h1>
-                    <a href="{{ route('referral.create') }}" class="btn btn-sm btn-success shadow-sm"><i
-                            class="fas fa-plus fa-sm text-white-50"></i> Tambah Referral</a>
-                </div>
-
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive overflow-auto">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead class="text-nowarp">
-                                    <tr class="text-nowarp">
-                                        <th>id</th>
-                                        <th>Nama</th>
-                                        <th class="text-nowarp">Marketing Team</th>
-                                        <th>User_id</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr class="text-nowarp">
-                                        <th>id</th>
-                                        <th>Nama</th>
-                                        <th class="text-nowarp">Marketing Team</th>
-                                        <th>User_id</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    @foreach ($referrals as $r)
-                                    <tr class="">
-                                        <td>{{ $r->id }}</td>
-                                        <td>{{ $r->name }}</td>
-                                        <td>{{ $r->marketing_team_id }}</td>
-                                        <td>{{ $r->user_id }}</td>
-                                        <td class="d-flex align-items-center justify-content-center text-nowrap">
-                                            <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Content Row -->
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
-
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> {{ $error }}
     </div>
-    <!-- End of Content Wrapper -->
+    @endforeach
+    @endif
+
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> {{ session()->get('success') }}
+    </div>
+    @endif
+
+
+    <!-- Page Heading -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Referrals</h1>
+        <a href="{{ route('referral.create') }}" class="btn btn-sm btn-success shadow-sm"><i
+                class="fas fa-plus fa-sm text-white-50"></i> Tambah Referral</a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive overflow-auto">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="text-nowarp">
+                        <tr class="text-nowarp">
+                            <th>id</th>
+                            <th>Nama</th>
+                            <th class="text-nowarp">Marketing Team</th>
+                            <th>User_id</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr class="text-nowarp">
+                            <th>id</th>
+                            <th>Nama</th>
+                            <th class="text-nowarp">Marketing Team</th>
+                            <th>User_id</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach ($referrals as $r)
+                        <tr class="">
+                            <td>{{ $r->id }}</td>
+                            <td>{{ $r->name }}</td>
+                            <td>{{ $r->marketing_team_id }}</td>
+                            <td>{{ $r->user_id }}</td>
+                            <td class="d-flex align-items-center justify-content-center text-nowrap">
+                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Row -->
 
 </div>
-<!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">

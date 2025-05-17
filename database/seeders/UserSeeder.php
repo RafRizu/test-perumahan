@@ -24,9 +24,9 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'username' => 'viewer1',
-            'password' => Hash::make('viewer123'),
-            'role'     => 'viewer',
+            'username' => 'referral1',
+            'password' => Hash::make('referral123'),
+            'role'     => 'referral',
             'created_at' => now(),
         ]);
     }

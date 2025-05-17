@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\AccountController;
 
 Route::redirect('/', '/login');
@@ -14,7 +17,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        return view('dashboard', ['user'=>$user]);
+        return view('dashboard', compact('user'));
     })->name('dashboard');
 
     Route::get('/marketing/create', [AccountController::class, 'indexMarketing'])->name('marketing.create');
@@ -22,4 +25,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/referral', [AccountController::class, 'listReferral'])->name('referral');
     Route::get('/referral/create', [AccountController::class, 'indexReferral'])->name('referral.create');
     Route::post('/referral/store', [AccountController::class, 'storeReferral'])->name('referral.store');
+
+    Route::get('/unit-group', [UnitController::class, 'index'])->name('unit-group.index');
+    Route::get('/unit/{unitGroupId}', [UnitController::class, 'indexUnit'])->name('unit.index');
+
+    Route::get('/customer/create', [CustomerController::class, 'index'])->name('customer.create');
+    Route::post('/customer/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('/customer/update/{id}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+    Route::get('/customer/detail/{id}', [CustomerController::class, 'show'])->name('customer.detail');
+    Route::get('/api/unit-groups/{id}/units', [CustomerController::class, 'getUnits']);
+
+
 });
