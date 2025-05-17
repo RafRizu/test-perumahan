@@ -13,7 +13,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = Auth::user();
+        return view('dashboard', ['user'=>$user]);
     })->name('dashboard');
 
     Route::get('/marketing/create', [AccountController::class, 'indexMarketing'])->name('marketing.create');
