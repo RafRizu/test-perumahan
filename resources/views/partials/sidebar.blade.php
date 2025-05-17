@@ -13,8 +13,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {{ (Route::is('dashboard') ? 'active' : '') }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -26,8 +26,8 @@
         @include('partials.sidenav.admin')
     @elseif ($user->role == "marketing")
         @include('partials.sidenav.marketing')
-    @elseif ($user->role == "referal")
-        @inlude('partials.sidenav.referal')
+    @elseif ($user->role == "referral")
+        @inlude('partials.sidenav.referral')
     @endif
 
     <!-- Divider -->
