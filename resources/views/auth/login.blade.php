@@ -21,7 +21,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" name="username" class="form-control form-control-user"
-                                            id="exampleInputEmail" value="{{ old('username') }}"laceholder="Enter Username...">
+                                            id="exampleInputEmail" value="{{ old('username') }}" placeholder="Enter Username...">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control form-control-user"
