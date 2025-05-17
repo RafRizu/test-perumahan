@@ -3,7 +3,7 @@
     height: calc(100vh - #{$topbar-base-height});
     overflow-y: scroll;
     position: fixed;
-    z-index: 9;
+    z-index: 999;
     top: $topbar-base-height;
     width: 100%;
 
@@ -236,7 +236,6 @@
         position: sticky;
 
         top: 0;
-        z-index: 0;
 
         .nav-item {
 
