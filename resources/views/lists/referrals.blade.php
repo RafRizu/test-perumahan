@@ -29,7 +29,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Referrals</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto">
@@ -78,7 +78,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
 <!-- Logout Modal
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

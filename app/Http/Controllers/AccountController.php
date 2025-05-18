@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller
 {
     //
+    public function listMarketing() {
+        $user = Auth::user();
+        $marketing = MarketingTeam::all();
+        return view('lists.marketing', compact('marketing', 'user'));
+    }
+
     public function indexMarketing()
     {
         $user = Auth::user();
@@ -66,7 +72,7 @@ class AccountController extends Controller
     public function listReferral() {
         $user = auth()->user();
         $referrals = Referral::all();
-        return view('list.referrals', compact('user', 'referrals'));
+        return view('lists.referrals', compact('user', 'referrals'));
     }
 
     public function indexReferral()
