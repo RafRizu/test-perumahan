@@ -20,6 +20,9 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Data Tables Css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
+
     @stack('styles')
 </head>
 
@@ -27,9 +30,11 @@
 
     <div id="wrapper">
 
+        @auth
         @include('partials.sidebar')
 
         @include('partials.topbar')
+        @endauth
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -90,6 +95,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/js/sb-admin-2.js') }}"></script>
+
+    <!-- Data Tables Js -->
+    <script src="https://cdn.datatables.net/2.3.1/js/dataTables.js"></script>
 
     <!-- WARNING: For chart later: Page level plugins -->
     <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
