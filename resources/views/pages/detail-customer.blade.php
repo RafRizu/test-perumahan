@@ -5,7 +5,7 @@
     @if(isset($customer))
         <div class="card">
             <div class="card-header">
-                <h4>Detail Customer</h4>
+                <h4 class="h4 mb-0 text-primary font-weight-bold text-uppercase">Detail Customer</h4>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
@@ -56,19 +56,20 @@
                 </table>
 
                 <div class="mt-4">
-                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning"><i class="fa fas fa-pen"></i> Edit</a>
 
                     <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa fas fa-trash"></i> Hapus</button>
                     </form>
 
-                    <a href="{{ route('unit.index',$unit_group->id) }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ route('unit.index',$unit_group->id) }}" class="btn btn-secondary"><i class="fa fas fa-arrow-left"></i> Kembali</a>
                 </div>
             </div>
         </div>
     @else
+        <!-- WARNING: Not Working because the Controller -->
         <div class="alert alert-warning">
             Data customer tidak ditemukan.
         </div>

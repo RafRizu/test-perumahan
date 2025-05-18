@@ -27,7 +27,7 @@
     @elseif ($user->role == "marketing")
         @include('partials.sidenav.marketing')
     @elseif ($user->role == "referral")
-        @inlude('partials.sidenav.referral')
+        @include('partials.sidenav.referral')
     @endif
 
     <!-- Divider -->

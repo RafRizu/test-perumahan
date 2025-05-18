@@ -10,6 +10,29 @@
         <!--         class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
     </div>
 
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> {{ $error }}
+    </div>
+    @endforeach
+    @endif
+
+    @if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> {{ session()->get('error') }}
+    </div>
+    @endif
+
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> {{ session()->get('success') }}
+    </div>
+    @endif
+
     <!-- content -->
     <div class="card shadow-sm border-top-primary rounded mb-4 mx-auto d-flex justify-content-center align-items-center"
         style="min-height: 500px;">

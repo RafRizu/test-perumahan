@@ -10,17 +10,17 @@
     </a>
 </li>
 
-<li class="nav-item">
-    <a class="nav-link" href="#">
+<li class="nav-item {{ Route::is('marketing') ? 'active' : '' }} ">
+    <a class="nav-link" href="{{ route('marketing') }}">
         <i class="fas fa-fw fa-pie-chart"></i>
         <span>Marketing</span>
 
     </a>
 </li>
 
-<li class="nav-item">
-    <a class="nav-link" href="#">
-        <i class="fas fa-fw fa-user-pen"></i>
+<li class="nav-item {{ (Route::is('unit-group.index')) ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('unit-group.index') }}">
+        <i class="fas fa-fw fa-address-book"></i>
         <span>Customers</span>
     </a>
 </li>

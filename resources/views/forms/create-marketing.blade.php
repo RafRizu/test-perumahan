@@ -1,35 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <h3 class="text-muted mt-4">Marketing Team</h3>
+<!-- Begin Page Content -->
+<div class="container">
 
-<div class="d-flex justify-content-center" style="margin-top: 80px;">
-    <div class="card shadow" style="width: 100%; max-width: 700px;">
+    <!-- Page Heading -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Marketing Team</h1>
+        <a href="{{ route('marketing') }}" class="btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tambah Marketing</h6>
+        </div>
         <div class="card-body">
-            <h3 class="card-title text-center fw-bold mb-4">Add Marketing Team</h3>
-            <form action="{{ route('marketing.store') }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="username" class="form-label text-muted">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username" required>
+            <div class="container">
+                @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error!</strong> {{ $error }}
                 </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label text-muted">Nama</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label text-muted">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
-                </div>
-                <input type="hidden" name="role" value="marketing">
-                <div class="text-end">
-                    <button type="submit" class="btn btn-success px-4">submit</button>
-                </div>
-            </form>
+                @endforeach
+                @endif
+                <form action="{{ route('marketing.store') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Masukan Username" value="{{ old('username') }}" required>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Masukan Nama"
+                                required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Masukan Password" required>
+                    </div>
+                    <input type="hidden" name="role" value="marketing">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
-</div>
-
+<!-- /.container-fluid -->
 @endsection
