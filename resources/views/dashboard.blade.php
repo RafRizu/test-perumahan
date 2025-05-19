@@ -34,12 +34,15 @@
     @endif
 
     <!-- content -->
-    <div class="card shadow-sm border-top-primary rounded mb-4 mx-auto d-flex justify-content-center align-items-center"
-        style="min-height: 500px;">
-        <div class="text-center">
-            <i class="fas fa-home fa-3x text-primary mb-3"></i>
-            <h5 class="text-muted">Gambar / Video Rumah</h5>
-        </div>
+  <div class="card shadow-sm border-top-primary rounded mb-4 mx-auto d-flex justify-content-center align-items-center">
+    <div class="text-center w-100">
+        <picture>
+            <!-- Gambar untuk mobile (potrait) -->
+            <source media="(max-width: 768px)" srcset="{{ asset('assets/images/siteplan2.jpg') }}">
+
+            <!-- Gambar default (desktop, landscape) -->
+            <img class="img-fluid" src="{{ asset('assets/images/siteplan.jpg') }}" alt="Siteplan">
+        </picture>
     </div>
 </div>
 <!-- End of PageContent -->
