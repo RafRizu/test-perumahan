@@ -68,8 +68,8 @@
                             <label for="status" class="form-label">Status</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="">Select Status</option>
-                                <option value="Booked">Booking</option>
-                                <option value="Order">Order</option>
+                                <option value="booked">Booking</option>
+                                <option value="ordered">Order</option>
                             </select>
                         </div>
                     </div>
