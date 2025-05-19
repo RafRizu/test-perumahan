@@ -19,6 +19,7 @@ class Customer extends Model
         'birth_date',
         'partner_birth_date',
         'payment_status',
+        'status',
         'solution',
         'unit_id',
         'referral_id',
@@ -29,7 +30,7 @@ class Customer extends Model
     {
         return $this->belongsTo(Unit::class);
     }
-    
+
     // Relasi ke Referral
     public function referral()
     {
