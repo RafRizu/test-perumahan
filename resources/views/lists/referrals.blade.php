@@ -43,15 +43,6 @@
                             <!-- <th>Action</th> -->
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr class="text-nowarp">
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th class="text-nowarp">Marketing Team</th>
-                            <th>User_id</th>
-                            <!-- <th>Action</th> -->
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @php
                             $no = 1

@@ -41,13 +41,6 @@
                             <!-- <th>Action</th> -->
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr class="text-nowarp">
-                            <th>No</th>
-                            <th>Nama</th>
-                            <!-- <th>Action</th> -->
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @php
                             $no = 1
