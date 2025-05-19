@@ -36,22 +36,25 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-nowarp">
                         <tr class="text-nowarp">
-                            <th>id</th>
+                            <th>No</th>
                             <th>Nama Tim</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr class="text-nowarp">
-                            <th>id</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @php
+                            $no = 1
+                        @endphp
                         @foreach ($marketing as $m)
                         <tr class="">
-                            <td>{{ $m->id }}</td>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $m->name }}</td>
                             <td class="d-flex align-items-center justify-content-center text-nowrap">
                                 <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a>
