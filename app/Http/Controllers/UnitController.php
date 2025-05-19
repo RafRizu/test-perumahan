@@ -17,8 +17,8 @@ class UnitController extends Controller
         $unitGroups = UnitGroup::all();
         $unitGroupsCount = UnitGroup::all()->count();
         $unit = Unit::all()->count();
-        $customerBooked = Customer::where('status','Booked')->get()->count();
-        $customerOrdered = Customer::where('status','Ordered')->get()->count();
+        $customerBooked = Customer::where('status','booked')->get()->count();
+        $customerOrdered = Customer::where('status','ordered')->get()->count();
         $customer = Customer::all()->count();
         $avalaibleUnits = $unit - $customer;
         return view('pages.unit-group', compact('unitGroups', 'customerBooked', 'unit', 'customerOrdered', 'customer', 'avalaibleUnits', 'unitGroupsCount', 'user'));

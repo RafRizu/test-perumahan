@@ -78,10 +78,10 @@
                             <label for="status" class="form-label">Status</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="">Select Status</option>
-                                <option value="Booked" {{ old('status', $customer->status) == 'Booked' ? 'selected' : ''
+                                <option value="booked" {{ old('status', $customer->status) == 'booked' ? 'selected' : ''
                                     }}>Booking
                                 </option>
-                                <option value="Order" {{ old('status', $customer->status) == 'Order' ? 'selected' : ''
+                                <option value="order" {{ old('status', $customer->status) == 'order' ? 'selected' : ''
                                     }}>Order
                                 </option>
                             </select>

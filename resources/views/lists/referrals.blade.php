@@ -36,32 +36,35 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-nowarp">
                         <tr class="text-nowarp">
-                            <th>id</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th class="text-nowarp">Marketing Team</th>
                             <th>User_id</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tfoot>
                         <tr class="text-nowarp">
-                            <th>id</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th class="text-nowarp">Marketing Team</th>
                             <th>User_id</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </tfoot>
                     <tbody>
+                        @php
+                            $no = 1
+                        @endphp
                         @foreach ($referrals as $r)
                         <tr class="">
-                            <td>{{ $r->id }}</td>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $r->name }}</td>
                             <td>{{ $r->marketing_team_id }}</td>
                             <td>{{ $r->user_id }}</td>
-                            <td class="d-flex align-items-center justify-content-center text-nowrap">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a>
-                            </td>
+                            <!-- <td class="d-flex align-items-center justify-content-center text-nowrap"> -->
+                            <!--     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a> -->
+                            <!-- </td> -->
                         </tr>
                         @endforeach
                     </tbody>
