@@ -38,14 +38,14 @@
                         <tr class="text-nowarp">
                             <th>No</th>
                             <th>Nama Tim</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tfoot>
                         <tr class="text-nowarp">
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </tfoot>
                     <tbody>
@@ -56,9 +56,9 @@
                         <tr class="">
                             <td>{{ $no++ }}</td>
                             <td>{{ $m->name }}</td>
-                            <td class="d-flex align-items-center justify-content-center text-nowrap">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a>
-                            </td>
+                            <!-- <td class="d-flex align-items-center justify-content-center text-nowrap"> -->
+                            <!--     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a> -->
+                            <!-- </td> -->
                         </tr>
                         @endforeach
                     </tbody>

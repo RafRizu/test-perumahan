@@ -40,7 +40,7 @@
                             <th>Nama</th>
                             <th class="text-nowarp">Marketing Team</th>
                             <th>User_id</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tfoot>
@@ -49,7 +49,7 @@
                             <th>Nama</th>
                             <th class="text-nowarp">Marketing Team</th>
                             <th>User_id</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </tfoot>
                     <tbody>
@@ -62,9 +62,9 @@
                             <td>{{ $r->name }}</td>
                             <td>{{ $r->marketing_team_id }}</td>
                             <td>{{ $r->user_id }}</td>
-                            <td class="d-flex align-items-center justify-content-center text-nowrap">
-                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a>
-                            </td>
+                            <!-- <td class="d-flex align-items-center justify-content-center text-nowrap"> -->
+                            <!--     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a> -->
+                            <!-- </td> -->
                         </tr>
                         @endforeach
                     </tbody>
