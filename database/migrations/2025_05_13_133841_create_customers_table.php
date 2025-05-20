@@ -20,10 +20,11 @@ return new class extends Migration
             $table->date('birth_date');
             $table->date('partner_birth_date');
             $table->enum('payment_status', ['reject', 'qualify']);
-            $table->enum('status', ['booked', 'ordered']);
+            $table->enum('status', ['booked', 'ordered','dp']);
+            $table->enum('approval_status', ['approved', 'pending', 'rejected'])->default('pending');
             $table->enum('solution',['Takeover Bank', 'Clearing Payment','Change Credit Name','Repayment'])->nullable();
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
-            $table->foreignId('referral_id')->constrained('referrals')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
 
     }
