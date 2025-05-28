@@ -25,9 +25,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/marketing', [AccountController::class, 'listMarketing'])->name('marketing');
         Route::get('/marketing/create', [AccountController::class, 'indexMarketing'])->name('marketing.create');
         Route::post('/marketing/store', [AccountController::class, 'storeMarketing'])->name('marketing.store');
-        Route::get('/referral', [AccountController::class, 'listReferral'])->name('referral');
-        Route::get('/referral/create', [AccountController::class, 'indexReferral'])->name('referral.create');
-        Route::post('/referral/store', [AccountController::class, 'storeReferral'])->name('referral.store');
+        /* TODO: Delete this */
+        /* Route::get('/referral', [AccountController::class, 'listReferral'])->name('referral'); */
+        /* Route::get('/referral/create', [AccountController::class, 'indexReferral'])->name('referral.create'); */
+        /* Route::post('/referral/store', [AccountController::class, 'storeReferral'])->name('referral.store'); */
     });
     Route::get('/unit-group', [UnitController::class, 'index'])->name('unit-group.index');
     Route::get('/unit/{unitGroupId}', [UnitController::class, 'indexUnit'])->name('unit.index');
