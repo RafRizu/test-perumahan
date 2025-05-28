@@ -28,31 +28,31 @@
                     <div class="row">
                         <div class="col-12 col-md-6 mb-3">
                             <label for="name" class="form-label">Customer Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                         </div>
                         <div class="col-12 col-md-6 mb-3">
                             <label for="partner_name" class="form-label">Partner Name</label>
-                            <input type="text" class="form-control" id="partner_name" name="partner_name">
+                            <input type="text" class="form-control" id="partner_name" name="partner_name" value="{{ old('partner_name') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 mb-3">
                             <label for="national_id" class="form-label">National ID</label>
-                            <input type="text" class="form-control" id="national_id" name="national_id" required>
+                            <input type="text" class="form-control" id="national_id" name="national_id" value="{{ old('national_id') }}" required>
                         </div>
                         <div class="col-12 col-md-6 mb-3">
                             <label for="partner_national_id" class="form-label">Partner National ID</label>
-                            <input type="text" class="form-control" id="partner_national_id" name="partner_national_id">
+                            <input type="text" class="form-control" id="partner_national_id" name="partner_national_id" value="{{ old('partner_national_id') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 mb-3">
                             <label for="birth_date" class="form-label">Birth Date</label>
-                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" required>
                         </div>
                         <div class="col-12 col-md-6 mb-3">
                             <label for="partner_birth_date" class="form-label">Partner Birth Date</label>
-                            <input type="date" class="form-control" id="partner_birth_date" name="partner_birth_date">
+                            <input type="date" class="form-control" id="partner_birth_date" name="partner_birth_date" value="{{ old('partner_birth_date') }}">
                         </div>
                     </div>
                     <div class="row">
@@ -72,17 +72,17 @@
                                 <option value="ordered">Order</option>
                             </select>
                         </div> --}}
+                        <div class="col-12 col-md-6 mb-3" id="solution_box">
+                            <label for="solution" class="form-label">Solution</label>
+                            <select name="solution" id="solution" class="form-control" disabled>
+                                <option value="">Select Solution</option>
+                                <option value="Takeover Bank">Takeover Bank</option>
+                                <option value="Clearing Payment">Clearing Payment</option>
+                                <option value="Change Credit Name">Change Credit Name</option>
+                                <option value="Repayment">Repayment</option>
+                            </select>
+                        </div>
                         <input type="hidden" name="status" value="ordered">
-                    </div>
-                    <div class="col-12 col-md-6 mb-3" id="solution_box" style="display: none;">
-                        <label for="solution" class="form-label">Solution</label>
-                        <select name="solution" id="solution" class="form-control">
-                            <option value="">Select Solution</option>
-                            <option value="Takeover Bank">Takeover Bank</option>
-                            <option value="Clearing Payment">Clearing Payment</option>
-                            <option value="Change Credit Name">Change Credit Name</option>
-                            <option value="Repayment">Repayment</option>
-                        </select>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 mb-3">
@@ -101,7 +101,8 @@
                             </select>
                         </div>
                     </div>
-                    <input type="hidden" name="referral_id" value="{{Auth::user()->referral->id}}">
+                    {{-- TODO: Fix this? --}}
+                    {{-- <input type="hidden" name="referral_id" value="{{Auth::user()->referral->id}}"> --}}
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -114,11 +115,12 @@
     document.addEventListener('DOMContentLoaded', function () {
         const paymentStatus = document.getElementById('payment_status');
         const solutionBox = document.getElementById('solution_box');
+        const solutionSelect = document.getElementById('solution')
         paymentStatus.addEventListener('change', function () {
             if (this.value === 'reject' || this.value === 'solution') {
-                solutionBox.style.display = '';
+                solutionSelect.removeAttribute("disabled");
             } else {
-                solutionBox.style.display = 'none';
+                solutionSelect.setAttribute("disabled", "true");
             }
         });
 
