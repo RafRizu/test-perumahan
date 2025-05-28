@@ -28,7 +28,7 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     {
-        $iduser = Auth::id();
+        $iduser = Auth::user()->id;
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'partner_name' => 'nullable|string|max:255',
@@ -103,7 +103,7 @@ class CustomerController extends Controller
         if ($validated['payment_status'] === 'qualify') {
             $validated['solution'] = null;
         }
-        $user_id = Auth::id();
+        $user_id = Auth::user()->id;
         // Update data customer
         $updated = $customer->update([
             'name' => $validated['name'],
