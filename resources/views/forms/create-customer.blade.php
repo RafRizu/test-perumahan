@@ -64,14 +64,15 @@
                                 <option value="qualify">Qualify</option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-6 mb-3">
+                        {{-- <div class="col-12 col-md-6 mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="">Select Status</option>
                                 <option value="booked">Booking</option>
                                 <option value="ordered">Order</option>
                             </select>
-                        </div>
+                        </div> --}}
+                        <input type="hidden" name="status" value="ordered">
                     </div>
                     <div class="col-12 col-md-6 mb-3" id="solution_box" style="display: none;">
                         <label for="solution" class="form-label">Solution</label>

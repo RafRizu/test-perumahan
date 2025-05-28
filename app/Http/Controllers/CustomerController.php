@@ -28,6 +28,7 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     {
+        $iduser = Auth::id();
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'partner_name' => 'nullable|string|max:255',
@@ -53,9 +54,11 @@ class CustomerController extends Controller
             'partner_birth_date' => $validated['partner_birth_date'],
             'payment_status' => $validated['payment_status'],
             'status' => $validated['status'],
-            'referral_id' => $validated['referral_id'],
+            'validation_status' => 'pending',
+            'user_id' => $iduser,
             'solution' => $validated['payment_status'] !== 'qualify' ? $validated['solution'] : null,
             'unit_id' => $validated['unit_id'],
+
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Customer created successfully.');
@@ -91,7 +94,7 @@ class CustomerController extends Controller
             'payment_status' => 'required|in:reject,qualify',
             'status' => 'required|in:booked,ordered',
             'solution' => 'nullable|string',
-            'referral_id' => 'required|exists:referrals,id',
+            'user_id' => 'required|exists:users,id',
             'unit_group_id' => 'required|exists:unit_groups,id',
             'unit_id' => 'required|exists:units,id',
         ]);
@@ -100,7 +103,7 @@ class CustomerController extends Controller
         if ($validated['payment_status'] === 'qualify') {
             $validated['solution'] = null;
         }
-
+        $user_id = Auth::id();
         // Update data customer
         $updated = $customer->update([
             'name' => $validated['name'],
@@ -112,7 +115,7 @@ class CustomerController extends Controller
             'payment_status' => $validated['payment_status'],
             'status' => $validated['status'],
             'solution' => $validated['solution'],
-            'referral_id' => $validated['referral_id'],
+            'referral_id' => $user_id,
             'unit_id' => $validated['unit_id'],
         ]);
 
