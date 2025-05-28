@@ -33,7 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/unit-group', [UnitController::class, 'index'])->name('unit-group.index');
     Route::get('/unit/{unitGroupId}', [UnitController::class, 'indexUnit'])->name('unit.index');
 
-    Route::get('/customer/create', [CustomerController::class, 'index'])->name('customer.create');
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('customers.store');
     Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
     Route::put('/customer/update/{id}', [CustomerController::class, 'update'])->name('customers.update');

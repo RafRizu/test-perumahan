@@ -22,14 +22,14 @@
 
     <!-- Page Heading -->
     <div class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Marketing</h1>
-        <a href="{{ route('marketing.create') }}" class="btn btn-sm btn-success shadow-sm"><i
-                class="fas fa-plus fa-sm text-white-50"></i> Tambah Marketing</a>
+        <h1 class="h3 mb-0 text-gray-800">Customers</h1>
+        <a href="{{ route('customer.create') }}" class="btn btn-sm btn-success shadow-sm"><i
+                class="fas fa-plus fa-sm text-white-50"></i> Tambah Customers</a>
     </div>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Marketing Team</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Customers</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto">
@@ -37,18 +37,31 @@
                     <thead class="text-nowarp">
                         <tr class="text-nowarp">
                             <th>No</th>
-                            <th>Nama Tim</th>
-                            <!-- <th>Action</th> -->
+                            <th>Nama</th>
+                            <th>Unit</th>
+                            <th>Unit Group</th>
+                            <th>Status</th>
+                            <th>Approval Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @php
                             $no = 1
                         @endphp
-                        @foreach ($marketing as $m)
+                        @foreach ($customers as $c)
                         <tr class="">
                             <td>{{ $no++ }}</td>
-                            <td>{{ $m->name }}</td>
+                            <td>{{ $c->name }}</td>
+                            <td>{{ $c->unit->name }}</td>
+                            <td>{{ $c->unit->unitGroup->name }}</td>
+                            <td>{{ $c->status }}</td>
+                            <td class="text-center">
+                                <span class="badge py-1 px-1 {{ $c->approval_status === 'pending' ? 'badge-secondary' : 'badge-primary' }}">
+                                    {{ $c->approval_status }}
+                                </span>
+                            </td>
+                            <td>{{ $c->name }}</td>
                             <!-- <td class="d-flex align-items-center justify-content-center text-nowrap"> -->
                             <!--     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a> -->
                             <!-- </td> -->

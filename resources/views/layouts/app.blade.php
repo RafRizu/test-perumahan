@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Test</title>
+    <title>E-Perumahan</title>
 
     <!-- Sb Admin Bootstrap css -->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">

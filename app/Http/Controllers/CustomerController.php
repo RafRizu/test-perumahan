@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class CustomerController extends Controller
 {
     //
-    public function index()
+    public function index(){
+        $user = Auth::user();
+        $customers = Customer::all();
+        return view("lists.customers", compact("user", "customers"));
+    }
+    public function create()
     {
         $user = Auth::user();
         $unit_groups = UnitGroup::all();
@@ -39,7 +44,6 @@ class CustomerController extends Controller
             'payment_status' => 'required|in:reject,qualify',
             'status' => 'required|in:booked,ordered',
             'solution' => 'nullable|string',
-            'referral_id' => 'required|exists:referrals,id',
             'unit_group_id' => 'required|exists:unit_groups,id',
             'unit_id' => 'required|exists:units,id',
         ]);
@@ -54,6 +58,7 @@ class CustomerController extends Controller
             'partner_birth_date' => $validated['partner_birth_date'],
             'payment_status' => $validated['payment_status'],
             'status' => $validated['status'],
+            /* FIX: Ini apaan? ⬇️ */
             'validation_status' => 'pending',
             'user_id' => $iduser,
             'solution' => $validated['payment_status'] !== 'qualify' ? $validated['solution'] : null,

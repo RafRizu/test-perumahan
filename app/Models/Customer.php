@@ -21,6 +21,7 @@ class Customer extends Model
         'payment_status',
         'status',
         'solution',
+        'user_id',
         'unit_id',
         'referral_id',
     ];
@@ -31,6 +32,7 @@ class Customer extends Model
         return $this->belongsTo(Unit::class);
     }
 
+    // TODO: Relasi ke users
     // Relasi ke Referral
     public function referral()
     {
