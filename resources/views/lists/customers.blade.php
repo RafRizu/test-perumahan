@@ -61,10 +61,17 @@
                                     {{ $c->approval_status }}
                                 </span>
                             </td>
-                            <td>{{ $c->name }}</td>
-                            <!-- <td class="d-flex align-items-center justify-content-center text-nowrap"> -->
-                            <!--     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a> -->
-                            <!-- </td> -->
+                            <td class="d-flex align-items-center justify-content-center text-nowrap" style="gap: 1rem;">
+                                <a href="#" class="btn btn-warning"><i class="fas fa-search"></i> Detail</a>
+
+                                @if ($user->role == "admin")
+                                <a href="#" class="btn btn-primary"><i class="fas fa-exchange"></i> Change Status</a>
+                                @endif
+
+                                @if ($user->role == "superadmin")
+                                <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Approval</a>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
