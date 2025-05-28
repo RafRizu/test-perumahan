@@ -15,7 +15,7 @@ class AccountController extends Controller
     //
     public function listMarketing() {
         $user = Auth::user();
-        $marketing = MarketingTeam::all();
+        $marketing = User::where(["role" => "marketing"])->get();
         return view('lists.marketing', compact('marketing', 'user'));
     }
 
@@ -46,15 +46,9 @@ class AccountController extends Controller
             // Create user
             $user = User::create([
                 'username' => $request->username,
+                'name' => $request->name,
                 'password' => Hash::make($request->password),
                 'role' => 'marketing',
-            ]);
-
-            // Create marketing team entry
-            MarketingTeam::create([
-                'user_id' => $user->id,
-                'name' => $request->name,
-                'username' => $request->username,
             ]);
 
             DB::commit();

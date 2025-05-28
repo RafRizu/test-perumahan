@@ -3,13 +3,6 @@
     Admin
 </div>
 
-<li class="nav-item {{ (Route::is('referral')) ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('referral') }}">
-        <i class="fas fa-fw fa-address-book"></i>
-        <span>Referrals</span>
-    </a>
-</li>
-
 <li class="nav-item {{ Route::is('marketing') ? 'active' : '' }} ">
     <a class="nav-link" href="{{ route('marketing') }}">
         <i class="fas fa-fw fa-pie-chart"></i>
