@@ -59,6 +59,7 @@ class CustomerController extends Controller
             'payment_status' => $validated['payment_status'],
             'status' => $validated['status'],
             /* FIX: Ini apaan? ⬇️ */
+            /* Default store customer, ntar di validate sama super admin */
             'validation_status' => 'pending',
             'user_id' => $iduser,
             'solution' => $validated['payment_status'] !== 'qualify' ? $validated['solution'] : null,
@@ -132,6 +133,27 @@ class CustomerController extends Controller
         return redirect()->route('customer.detail', $id)->with('success', 'Customer updated successfully.');
     }
 
+    public function validateCustomer($id)
+    {
+        if (!Auth::user()->hasRole('superadmin')) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to validate customers.');
+        }
+        $customer = Customer::findOrFail($id);
+        $customer->validation_status = 'approved';
+        $customer->save();
+        return redirect()->route('dashboard', $id)->with('success', 'Customer validated successfully.');
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $customer = Customer::findOrFail($id);
+        if (!in_array($status, ['booked', 'ordered', 'dp'])) {
+            return redirect()->back()->with('error', 'Invalid status.');
+        }
+        $customer->status = $status;
+        $customer->save();
+        return redirect()->route('dashboard', $id)->with('success', 'Customer status updated successfully.');
+    }
     public function destroy($id)
     {
         $customer = Customer::findOrFail($id);

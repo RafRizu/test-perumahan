@@ -20,6 +20,8 @@ class Customer extends Model
         'partner_birth_date',
         'payment_status',
         'status',
+        'approval_status',
+        'dp_amount',
         'solution',
         'user_id',
         'unit_id',
