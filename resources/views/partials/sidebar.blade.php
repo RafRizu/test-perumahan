@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon">
             <i class="fas fa-home"></i>
         </div>
-        <div class="sidebar-brand-text mx-2">DAHAYU BUMI SEJAHTERA</div>
+        <div class="sidebar-brand-text mx-2">BUMI DAHAYU SEJAHTERA</div>
     </a>
 
     <!-- Divider -->
