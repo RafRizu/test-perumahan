@@ -18,7 +18,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        return view('dashboard', compact('user'));
+        $customers_model = Customer::class;
+
+        if ($user->role === "marketing") {
+            $customers = Customer::where([ "user_id" => $user->id ])->get();
+        } else {
+            $customers = Customer::all();
+        }
+        return view('dashboard', compact('user', 'customers'));
     })->name('dashboard');
 
     Route::get('/marketing', [AccountController::class, 'listMarketing'])->name('marketing');

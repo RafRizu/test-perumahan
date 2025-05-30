@@ -7,7 +7,6 @@
     <a class="nav-link" href="{{ route('marketing') }}">
         <i class="fas fa-fw fa-pie-chart"></i>
         <span>Marketing</span>
-
     </a>
 </li>
 

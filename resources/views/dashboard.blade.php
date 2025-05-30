@@ -49,7 +49,6 @@
     </div>
 </div>
 
-@includeWhen($user->role === "admin", 'partials.dashboard.admin')
-@includeWhen($user->role === "marketing", 'partials.dashboard.marketing')
+@include('partials.data.customers')
 
 @endsection
