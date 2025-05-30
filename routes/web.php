@@ -21,10 +21,11 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard', compact('user'));
     })->name('dashboard');
 
+    Route::get('/marketing', [AccountController::class, 'listMarketing'])->name('marketing');
+    Route::get('/marketing/create', [AccountController::class, 'indexMarketing'])->name('marketing.create');
+    Route::post('/marketing/store', [AccountController::class, 'storeMarketing'])->name('marketing.store');
+
     Route::middleware(CheckRole::class . ':admin')->group(function () {
-        Route::get('/marketing', [AccountController::class, 'listMarketing'])->name('marketing');
-        Route::get('/marketing/create', [AccountController::class, 'indexMarketing'])->name('marketing.create');
-        Route::post('/marketing/store', [AccountController::class, 'storeMarketing'])->name('marketing.store');
         /* TODO: Delete this */
         /* Route::get('/referral', [AccountController::class, 'listReferral'])->name('referral'); */
         /* Route::get('/referral/create', [AccountController::class, 'indexReferral'])->name('referral.create'); */

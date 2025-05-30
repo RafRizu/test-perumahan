@@ -75,7 +75,18 @@
                             </span>
                         </td>
                         <td class="d-flex align-items-center justify-content-center text-nowrap" style="gap: .75rem;">
-                            <a href="#" class="btn btn-info btn-sm"><i class="fas fa-search"></i> Detail</a>
+                            <button class="btn btn-info btn-sm btn-detail" data-toggle="modal" data-target="#detailCustomerModal"
+
+                            data-name="{{ $c->name }}"
+                            data-partnername="{{ $c->partner_name }}"
+                            data-nik="{{ $c->national_id }}"
+                            data-partnernik="{{ $c->partner_national_id }}"
+                            data-old="{{ $c->birth_date ? \Carbon\Carbon::parse($c->birth_date)->age : '-' }} Tahun"
+                            data-partnerold="{{ $c->partner_birth_date ? \Carbon\Carbon::parse($c->partner_birth_date)->age : '-' }} Tahun"
+                            data-unitgroup="{{ $c->unit->unitGroup->name }}"
+                            data-unit="{{ $c->unit->name }}"
+
+                            ><i class="fas fa-search"></i> Detail</button>
 
                             @if (in_array($user->role, ["admin", "superadmin"] ))
                             <div class="btn-group btn-group-sm">
@@ -116,7 +127,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <table class="table table-bordered table-sm">
+                    <table class="table table-bordered table-sm" id="modalTable">
                         <tr>
                             <th>Nama</th>
                             <td>Andi Saputra</td>
@@ -170,6 +181,60 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
+@push('scripts')
+<script>
+document.querySelectorAll(".btn-detail").forEach((btn) => {
+    const items = {
+        "name": btn.dataset.name,
+        "partnerName": btn.dataset.partnername,
+        "NIK": btn.dataset.nik,
+        "partnerNIK": btn.dataset.partnernik,
+        "old": btn.dataset.old,
+        "partnerOld": btn.dataset.partnerold,
+        "unitGroup": btn.dataset.unitgroup,
+        "unit": btn.dataset.unit,
+    }
+
+    btn.addEventListener("click", () => {
+        document.getElementById("modalTable").innerHTML = `
+        <tr>
+            <th>Nama</th>
+            <td>${items.name}</td>
+        </tr>
+        <tr>
+            <th>Nama Pasangan</th>
+            <td>${items.partnerName}</td>
+        </tr>
+        <tr>
+            <th>NIK</th>
+            <td>${items.NIK}</td>
+        </tr>
+        <tr>
+            <th>NIK Pasangan</th>
+            <td>${items.partnerNIK}</td>
+        </tr>
+        <tr>
+            <th>Usia</th>
+            <td>${items.old}</td>
+        </tr>
+        <tr>
+            <th>Usia Pasangan</th>
+            <td>${items.partnerOld}</td>
+        </tr>
+        <tr>
+            <th>Unit Group</th>
+            <td>${items.unitGroup}</td>
+        </tr>
+        <tr>
+            <th>Unit</th>
+            <td>${items.unit}</td>
+        </tr>
+        `
+    })
+})
+</script>
+@endpush
 
 <!-- Logout Modal
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
