@@ -50,5 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer/detail/{id}', [CustomerController::class, 'show'])->name('customer.detail');
     Route::get('/api/unit-groups/{id}/units', [CustomerController::class, 'getUnits']);
 
+    Route::post('/customer/change/status/booking/{id}', [CustomerController::class, 'changeStatusBooking'])->name('customers.change.booking');
+    Route::post('/customer/change/status/dp/{id}', [CustomerController::class, 'changeStatusDP'])->name('customers.change.dp');
+
+    Route::post('/customer/approve/{id}', [CustomerController::class, 'validateCustomer'])->name('customers.approve');
+
 
 });

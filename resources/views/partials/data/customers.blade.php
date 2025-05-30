@@ -55,14 +55,26 @@
                                 <i class="fas fa-exchange"></i> Change
                             </button>
                             <div class="dropdown-menu dropdown-menu-right text-uppercase">
-                                <a class="dropdown-item" href="#">booked</a>
-                                <a class="dropdown-item" href="#">dp</a>
-                                <a class="dropdown-item" href="#">akad</a>
+                                <form action="{{ route('customers.change.booking', $c->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item" style="width:100%;text-align:left;">booked</button>
+                                </form>
+                                <form action="{{ route('customers.change.dp', $c->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item" style="width:100%;text-align:left;">dp</button>
+                                </form>
                             </div>
                         </div>
+                        {{-- sementara disabled --}}
+                        {{-- <a class="dropdown-item" href="#">akad</a> --}}
 
                         @if ($user->role == "superadmin")
-                        <a href="#" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Approval</a>
+                        <form action="{{ route('customers.approve', $c->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm">
+                                <i class="fas fa-check"></i> Approval
+                            </button>
+                        </form>
                         @endif
                     </td>
                 </tr>

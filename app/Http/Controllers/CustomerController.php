@@ -69,6 +69,8 @@ class CustomerController extends Controller
             /* FIX: Ini apaan? ⬇️ */
             /* Default store customer, ntar di validate sama super admin */
             'validation_status' => 'pending',
+            // jaga jaga aja siapa tau revisi
+            // 'validation_status' => 'approved',
             'user_id' => $iduser,
             'solution' => $validated['payment_status'] !== 'qualify' ? $validated['solution'] : null,
             'unit_id' => $validated['unit_id'],
@@ -143,22 +145,42 @@ class CustomerController extends Controller
 
     public function validateCustomer($id)
     {
-        if (!Auth::user()->hasRole('superadmin')) {
+        if (!Auth::user()->role == 'superadmin') {
             return redirect()->route('dashboard')->with('error', 'You do not have permission to validate customers.');
         }
         $customer = Customer::findOrFail($id);
-        $customer->validation_status = 'approved';
+        $customer->approval_status = 'approved';
         $customer->save();
         return redirect()->route('dashboard', $id)->with('success', 'Customer validated successfully.');
     }
 
-    public function changeStatus($id, $status)
+    public function changeStatusBooking($id)
     {
-        $customer = Customer::findOrFail($id);
-        if (!in_array($status, ['booked', 'ordered', 'dp'])) {
-            return redirect()->back()->with('error', 'Invalid status.');
+        if (!Auth::user()->role == 'superadmin') {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to change customer status.');
         }
-        $customer->status = $status;
+        $customer = Customer::findOrFail($id);
+        if ($customer->status !== 'ordered' || $customer->approval_status !== 'approved') {
+            return redirect()->route('dashboard')->with('error', 'Customer status must be ordered and approval status must be approved before changing to booked.');
+        }
+        $customer = Customer::findOrFail($id);
+        $customer->status = 'booked';
+        $customer->approval_status = 'pending';
+        $customer->save();
+        return redirect()->route('dashboard', $id)->with('success', 'Customer status updated successfully.');
+    }
+    public function changeStatusDP($id)
+    {
+        if (!Auth::user()->role == 'superadmin') {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission to change customer status.');
+        }
+        if (Customer::where('id', $id)->where('status', 'booked')->count() == 0) {
+            return redirect()->route('dashboard')->with('error', 'Customer status must be booked before changing to DP.');
+        }
+
+        $customer = Customer::findOrFail($id);
+        $customer->status = 'dp';
+        $customer->approval_status = 'pending';
         $customer->save();
         return redirect()->route('dashboard', $id)->with('success', 'Customer status updated successfully.');
     }
