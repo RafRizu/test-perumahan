@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon">
             <i class="fas fa-home"></i>
         </div>
-        <div class="sidebar-brand-text mx-2">DAHAYU BUMI SEJAHTERA</div>
+        <div class="sidebar-brand-text mx-2">BUMI DAHAYU SEJAHTERA</div>
     </a>
 
     <!-- Divider -->
@@ -22,13 +22,9 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    @if ($user->role == "admin")
-        @include('partials.sidenav.admin')
-    @elseif ($user->role == "marketing")
-        @include('partials.sidenav.marketing')
-    @elseif ($user->role == "referral")
-        @include('partials.sidenav.referral')
-    @endif
+    @includeWhen($user->role == "admin", 'partials.sidenav.admin')
+    @includeWhen($user->role == "marketing", 'partials.sidenav.marketing')
+    @includeWhen($user->role == "superadmin", 'partials.sidenav.superadmin')
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
