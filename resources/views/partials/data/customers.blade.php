@@ -62,7 +62,11 @@
                         </div>
 
                         @if ($user->role == "superadmin")
-                        <a href="#" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Approval</a>
+                            @if ($c->approval_status == "approved")
+                                <a href="javascript:void(0)" class="btn btn-secondary btn-sm" style="pointer-events: none;"><i class="fas fa-check"></i> Approval</a>
+                            @else
+                                <a href="javascript:void(0)" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Approval</a>
+                            @endif
                         @endif
                     </td>
                 </tr>
