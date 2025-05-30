@@ -14,13 +14,12 @@ class CustomerController extends Controller
     public function index(){
         $user = Auth::user();
 
-        if ($user->role == 'admin') {
-
+        if (in_array($user->role, ['admin', 'superadmin'])) {
             $customers = Customer::all();
-            return view("dashboard", compact("user", "customers"));
+            return view("lists.customers", compact("user", "customers"));
         }elseif ($user->role == 'marketing') {
             $customers = Customer::where('user_id', $user->id)->get();
-            return view("dashboard", compact("user", "customers"));
+            return view("lists.customers", compact("user", "customers"));
 
         }
 
