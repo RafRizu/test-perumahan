@@ -69,12 +69,11 @@
                         {{-- <a class="dropdown-item" href="#">akad</a> --}}
 
                         @if ($user->role == "superadmin")
-                        <form action="{{ route('customers.approve', $c->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm">
-                                <i class="fas fa-check"></i> Approval
-                            </button>
-                        </form>
+                            @if ($c->approval_status == "approved")
+                                <a href="javascript:void(0)" class="btn btn-secondary btn-sm" style="pointer-events: none;"><i class="fas fa-check"></i> Approval</a>
+                            @else
+                                <a href="javascript:void(0)" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Approval</a>
+                            @endif
                         @endif
                     </td>
                 </tr>
