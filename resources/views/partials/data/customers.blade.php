@@ -1,7 +1,7 @@
 <div class="card shadow mb-4">
     <div class="card-header font-weight-bold text-primary">Data Customer</div>
     <div class="card-body p-3 table-responsive">
-        <table class="table table-bordered table-hover mb-0" id=""
+        <table class="table table-bordered table-hover mb-0">
             <thead class="thead-light">
                 <tr>
                     <th>No</th>
