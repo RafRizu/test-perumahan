@@ -1,30 +1,31 @@
 @extends('layouts.app')
 @section('content')
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     @if ($errors->any())
-    @foreach ($errors->all() as $error)
-    <div class="alert alert-danger alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Error!</strong> {{ $error }}
-    </div>
-    @endforeach
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Error!</strong> {{ $error }}
+            </div>
+        @endforeach
     @endif
 
     @if (session()->has('success'))
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Success!</strong> {{ session()->get('success') }}
-    </div>
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> {{ session()->get('success') }}
+        </div>
     @endif
-
 
     <!-- Page Heading -->
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Marketing</h1>
-        <a href="{{ route('marketing.create') }}" class="btn btn-sm btn-success shadow-sm"><i
-                class="fas fa-plus fa-sm text-white-50"></i> Tambah Marketing</a>
+        <button class="btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#addMarketingModal">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Marketing
+        </button>
     </div>
 
     <div class="card shadow mb-4">
@@ -34,58 +35,68 @@
         <div class="card-body">
             <div class="table-responsive overflow-auto">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="text-nowarp">
-                        <tr class="text-nowarp">
+                    <thead class="text-nowrap">
+                        <tr>
                             <th>No</th>
-                            <th>Nama Tim</th>
-                            <!-- <th>Action</th> -->
+                            <th>Nama</th>
+                            <th>Username</th>
+                            <th>Password</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $no = 1
-                        @endphp
-                        @foreach ($marketing as $m)
-                        <tr class="">
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $m->name }}</td>
-                            <!-- <td class="d-flex align-items-center justify-content-center text-nowrap"> -->
-                            <!--     <a href="#" class="btn btn-primary"><i class="fas fa-search"></i> Detail</a> -->
-                            <!-- </td> -->
-                        </tr>
-                        @endforeach
+                        <th>1</th>
+                            <th>Heru</th>
+                            <th>MARKETING 1</th>
+                            <th>1234567</th>
                     </tbody>
-                </table>
+                </table>    
             </div>
         </div>
     </div>
 
-    <!-- Content Row -->
+    <!-- Add Marketing Modal -->
+    <div class="modal fade" id="addMarketingModal" tabindex="-1" role="dialog" aria-labelledby="addMarketingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="{{ route('marketing.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold" id="addMarketingModalLabel">Add Marketing Team</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="name" class="form-control" placeholder="Masukkan Nama" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </div>
+<!-- End Container -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div> -->
 @endsection
