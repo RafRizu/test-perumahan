@@ -42,7 +42,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto">
-                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-nowrap thead-light">
                         <tr>
                             <th>No</th>

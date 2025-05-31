@@ -39,15 +39,20 @@
                             {{ $c->approval_status }}
                         </span>
                     </td>
-                    <td class="d-flex align-items-center justify-content-center text-nowrap" style="gap: .75rem;">
+                    <td class="d-flex justify-content-center text-nowrap" style="gap: .75rem;">
                         <button class="btn btn-info btn-sm btn-detail" data-toggle="modal"
-                            data-target="#detailCustomerModal" data-name="{{ $c->name }}"
+                            data-target="#detailCustomerModal"
+                            data-name="{{ $c->name }}"
                             data-partnername="{{ $c->partner_name }}" data-nik="{{ $c->national_id }}"
                             data-partnernik="{{ $c->partner_national_id }}"
                             data-old="{{ $c->birth_date ? \Carbon\Carbon::parse($c->birth_date)->age : '-' }} Tahun"
                             data-partnerold="{{ $c->partner_birth_date ? \Carbon\Carbon::parse($c->partner_birth_date)->age : '-' }} Tahun"
-                            data-unitgroup="{{ $c->unit->unitGroup->name }}" data-unit="{{ $c->unit->name }}"><i
-                                class="fas fa-search"></i> Detail</button>
+                            data-unitgroup="{{ $c->unit->unitGroup->name }}"
+                            data-unit="{{ $c->unit->name }}"
+                            data-edit-url="{{ route('customers.edit', ['id'=>$c->id]) }}"
+                            data-delete-url="{{ route('customers.destroy', ['id'=>$c->id]) }}">
+                            <i class="fas fa-search"></i> Detail
+                        </button>
 
                         <div class="btn-group btn-group-sm">
                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
@@ -138,8 +143,14 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-warning btn-sm"><i class="fas fa-pen"></i> Edit</button>
-                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                <a href="javascript:void(0)" class="btn btn-warning btn-sm" id="edit-button"><i class="fas fa-pen"></i> Edit</a>
+
+                <form action="{{ route('customers.destroy', 'zero') }}" method="POST" id="form-delete" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
+                </form>
+
                 <button class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fas fa-times"></i>
                     Tutup</button>
             </div>
@@ -149,6 +160,9 @@
 
 @push('scripts')
 <script>
+const formDelete = document.getElementById("form-delete")
+const editButton = document.getElementById("edit-button");
+
 document.querySelectorAll(".btn-detail").forEach((btn) => {
     const items = {
         "name": btn.dataset.name,
@@ -159,9 +173,13 @@ document.querySelectorAll(".btn-detail").forEach((btn) => {
         "partnerOld": btn.dataset.partnerold,
         "unitGroup": btn.dataset.unitgroup,
         "unit": btn.dataset.unit,
+        "deleteUrl": btn.dataset.deleteUrl,
+        "editUrl": btn.dataset.editUrl
     }
 
     btn.addEventListener("click", () => {
+        editButton.setAttribute("href", items.editUrl)
+        formDelete.setAttribute('action', items.deleteUrl)
         document.getElementById("modalTable").innerHTML = `
         <tr>
             <th>Nama</th>
