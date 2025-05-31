@@ -13,6 +13,14 @@
         @endforeach
     @endif
 
+
+    @if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> {{ session()->get('error') }}
+    </div>
+    @endif
+
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -34,22 +42,35 @@
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="text-nowrap">
+                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="text-nowrap thead-light">
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
                             <th>Username</th>
-                            <th>Password</th>
+                            {{-- TODO: Bikin Change Password nanti
+                            <th>Action</th>
+                            --}}
                         </tr>
                     </thead>
                     <tbody>
-                        <th>1</th>
-                            <th>Heru</th>
-                            <th>MARKETING 1</th>
-                            <th>1234567</th>
+                        @php
+                            $no = 1
+                        @endphp
+                        @foreach ($marketing as $m)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $m->name }}</td>
+                            <td>{{ $m->username }}</td>
+                            {{-- TODO: Bikin Change Password nanti
+                            <td>
+                                <button class="btn btn-primary"><i class="fa fa-lock"></i> Change Password</button>
+                            </td>
+                            --}}
+                        </tr>
+                        @endforeach
                     </tbody>
-                </table>    
+                </table>
             </div>
         </div>
     </div>
@@ -60,8 +81,8 @@
             <div class="modal-content">
                 <form action="{{ route('marketing.store') }}" method="POST">
                     @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold" id="addMarketingModalLabel">Add Marketing Team</h5>
+                    <div class="modal-header bg-light">
+                        <h5 class="modal-title font-weight-bold text-primary" id="addMarketingModalLabel">Add Marketing Team</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -81,6 +102,8 @@
                             <input type="password" name="password" class="form-control" placeholder="Masukkan Password" required>
                         </div>
                     </div>
+
+                    <input type="hidden" name="role" value="marketing">
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Submit</button>

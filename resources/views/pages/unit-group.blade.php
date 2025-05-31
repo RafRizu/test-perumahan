@@ -5,7 +5,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h1 class="h3 mb-0 font-weight-bold text-primary">Data Customers</h1>
+            <h1 class="h3 mb-0 font-weight-bold text-primary">Data Units</h1>
         </div>
         <div class="card-body">
             <div class="row">
