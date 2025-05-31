@@ -110,7 +110,8 @@ class CustomerController extends Controller
             'payment_status' => 'required|in:reject,qualify',
             'status' => 'required|in:booked,ordered',
             'solution' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
+            /* INFO: Maybe Unused */
+            /* 'user_id' => 'required|exists:users,id', */
             'unit_group_id' => 'required|exists:unit_groups,id',
             'unit_id' => 'required|exists:units,id',
         ]);
@@ -119,7 +120,6 @@ class CustomerController extends Controller
         if ($validated['payment_status'] === 'qualify') {
             $validated['solution'] = null;
         }
-        $user_id = Auth::user()->id;
         // Update data customer
         $updated = $customer->update([
             'name' => $validated['name'],
@@ -131,7 +131,6 @@ class CustomerController extends Controller
             'payment_status' => $validated['payment_status'],
             'status' => $validated['status'],
             'solution' => $validated['solution'],
-            'referral_id' => $user_id,
             'unit_id' => $validated['unit_id'],
         ]);
 
