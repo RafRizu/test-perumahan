@@ -27,8 +27,8 @@ class AccountController extends Controller
 
     public function storeMarketing(Request $request)
     {
-        // Only admin can access
-        if (!auth()->check() || auth()->user()->role !== 'admin') {
+        // Only admin and superadmin can access
+        if (!auth()->check() || !in_array(auth()->user()->role, [ 'admin', 'superadmin' ])) {
             return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk membuat akun.');
         }
 
