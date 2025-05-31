@@ -29,7 +29,7 @@ class AccountController extends Controller
     {
         // Only admin can access
         if (!auth()->check() || auth()->user()->role !== 'admin') {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki akses untuk membuat akun.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk membuat akun.');
         }
 
         // Validate input
@@ -52,13 +52,13 @@ class AccountController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('dashboard')->with('success', 'Akun marketing berhasil dibuat.');
+            return redirect()->back()->with('success', 'Akun marketing berhasil dibuat.');
         } catch (\Exception $e) {
             DB::rollBack();
             // Optional: log error
             // \Log::error('Marketing account creation failed', ['error' => $e->getMessage()]);
 
-            return redirect()->route('dashboard')->with('error', 'Gagal membuat akun marketing: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal membuat akun marketing: ' . $e->getMessage());
         }
     }
 
