@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
+use App\Models\Unit;
 use App\Models\Customer;
-use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckRole;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\AccountController;
-use App\Http\Middleware\CheckRole;
+use App\Http\Controllers\CustomerController;
 
 Route::redirect('/', '/login');
 
@@ -19,13 +20,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $user = Auth::user();
         $customers_model = Customer::class;
-
+        $units = Unit::with('customers')->get();
         if ($user->role === "marketing") {
             $customers = Customer::where([ "user_id" => $user->id ])->get();
         } else {
             $customers = Customer::all();
         }
-        return view('dashboard', compact('user', 'customers'));
+        return view('dashboard', compact('user', 'customers', 'units'));
     })->name('dashboard');
 
     Route::get('/marketing', [AccountController::class, 'listMarketing'])->name('marketing');

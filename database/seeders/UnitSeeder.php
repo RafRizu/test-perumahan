@@ -13,7 +13,6 @@ class UnitSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $units = [
             ['unit_group_id' => 1, 'start' => 1, 'end' => 8],
             ['unit_group_id' => 2, 'start' => 1, 'end' => 18],
@@ -48,14 +47,33 @@ class UnitSeeder extends Seeder
             ['unit_group_id' => 27, 'start' => 1, 'end' => 5],
 
         ];
-        $name = 'Unit - ';
-        foreach ($units as $unit) {
+
+        $unitSize = 15; // ukuran tiap kotak unit
+        $gap = 3; // jarak antar kotak
+        $startTop = 100; // titik Y awal
+        $startLeft = 100; // titik X awal
+
+        foreach ($units as $index => $unit) {
+            $row = 0;
+            $col = 0;
+
             for ($i = $unit['start']; $i <= $unit['end']; $i++) {
-                Unit::firstOrCreate([
+                $left = $startLeft + ($col * ($unitSize + $gap));
+                $top = $startTop + ($index * 20); // jarak antar baris grup
+
+                Unit::updateOrCreate([
                     'unit_group_id' => $unit['unit_group_id'],
-                    'name' => $name . $i,
+                    'name' => 'Unit - ' . $i,
+                ], [
+                    'top' => $top,
+                    'left' => $left,
+                    'width' => $unitSize,
+                    'height' => $unitSize,
                 ]);
+
+                $col++;
             }
         }
     }
+
 }
