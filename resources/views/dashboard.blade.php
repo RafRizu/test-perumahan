@@ -36,28 +36,79 @@
     <div class="text-center position-relative" style="width: 1000px; max-width: 100%;">
         <img src="{{ asset('assets/images/siteplan2.jpg') }}" alt="Siteplan" class="img-fluid">
 
-        {{-- Overlay for each unit --}}
-        @foreach ($units as $unit)
-            @if (!is_null($unit->top) && !is_null($unit->left))
-                <div
-                    class="position-absolute"
-                    title="Unit {{ $unit->name }} - {{ $unit->customers ? 'Terisi' : 'Kosong' }}"
-                    style="
-                        top: {{ $unit->top }}px;
-                        left: {{ $unit->left }}px;
-                        width: {{ $unit->width }}px;
-                        height: {{ $unit->height }}px;
-                        background-color: {{ $unit->customers ? 'green ' : 'grey' }};
-                        border: 1px solid rgba(0,0,0,0.1);
-                        z-index: 10;
-                        cursor: pointer;
-                        border-radius: 50%;
-                    ">
-                </div>
-            @endif
-        @endforeach
+        <div class="overlay" id="debug-div" style="position: absolute; width: 100%; max-width: 901px; height: 100%; top:0; left: 50%; transform: translateX(-50%);">
+            {{-- Overlay for each unit --}}
+            @foreach ($units as $unit)
+                @if (!is_null($unit->top) && !is_null($unit->left))
+                    <div
+                        class="position-absolute"
+                        title="Unit {{ $unit->name }} - {{ $unit->customers ? 'Terisi' : 'Kosong' }}"
+                        style="
+                            top: {{ $unit->top }}%;
+                            left: {{ $unit->left }}%;
+                            width: {{ $unit->width }}px;
+                            height: {{ $unit->height }}px;
+                            background-color: {{ $unit->customers ? 'green ' : 'grey' }};
+                            border: 1px solid rgba(0,0,0,0.1);
+                            z-index: 10;
+                            cursor: pointer;
+                            color: white;
+                            transform: translate(-50%,-50%);
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+                        ">
+                    </div>
+                @endif
+            @endforeach
+        </div>
     </div>
 </div>
 
 @include('partials.data.customers')
+@push('scripts')
+<script>
+{{-- NOTE: INI HANYA UNTUK DEBUGING DAN MANCARI TITIK UNIT, HAPUS NANTI --}}
+const debugDiv = document.getElementById('debug-div');
+const bigArray = [];
+
+debugDiv.addEventListener('click', function(event) {
+    // Mendapatkan ukuran elemen
+    const rect = debugDiv.getBoundingClientRect();
+    const divWidth = rect.width;
+    const divHeight = rect.height;
+
+    // Mendapatkan posisi klik relatif terhadap elemen
+    const clickX = event.clientX - rect.left;
+    const clickY = event.clientY - rect.top;
+
+    // Menghitung persentase
+    const percentageX = (clickX / divWidth) * 100;
+    const percentageY = (clickY / divHeight) * 100;
+
+    bigArray.push([percentageX, percentageY]);
+
+    // Simpan ke clipboard
+    navigator.clipboard.writeText(JSON.stringify(bigArray));
+
+    // Menampilkan hasil
+    console.log(`${percentageX.toFixed(2)}%, ${percentageY.toFixed(2)}%`);
+    console.log(bigArray.length);
+});
+
+const customCursor = document.querySelector('#custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+    customCursor.style.left = `${e.pageX}px`; // Set the horizontal position
+    customCursor.style.top = `${e.pageY}px`; // Set the vertical position
+});
+</script>
+
+@endpush
+
 @endsection
+
+{{-- TODO: Delete Custom Cursor --}}
+{{-- NOTE: INI HANYA UNTUK DEBUGING DAN MANCARI TITIK UNIT, HAPUS NANTI --}}
+<div id="custom-cursor" style="width: 15px; height: 15px; background-color: brown; border-radius: 50%; position: absolute; transform: translate(-50%,-50%); z-index: 999999; pointer-events: none;"></div>
