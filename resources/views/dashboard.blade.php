@@ -111,4 +111,4 @@ document.addEventListener('mousemove', (e) => {
 
 {{-- TODO: Delete Custom Cursor --}}
 {{-- NOTE: INI HANYA UNTUK DEBUGING DAN MANCARI TITIK UNIT, HAPUS NANTI --}}
-<div id="custom-cursor" style="width: 15px; height: 15px; background-color: brown; border-radius: 50%; position: absolute; transform: translate(-50%,-50%); z-index: 999999; pointer-events: none;"></div>
+{{-- <div id="custom-cursor" style="width: 15px; height: 15px; background-color: brown; border-radius: 50%; position: absolute; transform: translate(-50%,-50%); z-index: 999999; pointer-events: none;"></div> --}}

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('unit_group_id')->constrained('unit_groups')->onDelete('cascade');
             // Posisi untuk overlay (dalam pixel)
-            $table->integer('top')->nullable();
-            $table->integer('left')->nullable();
+            $table->string('top')->nullable();
+            $table->string('left')->nullable();
             $table->integer('width')->default(35); // default ukuran persegi
             $table->integer('height')->default(35);
         });
