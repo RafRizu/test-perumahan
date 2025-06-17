@@ -31,9 +31,9 @@
     <div id="wrapper">
 
         @auth
-        @include('partials.sidebar')
+            @include('partials.sidebar')
 
-        @include('partials.topbar')
+            @include('partials.topbar')
         @endauth
 
         <!-- Content Wrapper -->
@@ -87,8 +87,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Bundled JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js"></script>
@@ -101,6 +100,135 @@
 
     <!-- WARNING: For chart later: Page level plugins -->
     <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentStatus = document.getElementById('payment_status');
+            const solutionBox = document.getElementById('solution_box');
+            const solutionSelect = document.getElementById('solution')
+            paymentStatus.addEventListener('change', function() {
+                if (this.value === 'reject' || this.value === 'solution') {
+                    solutionSelect.removeAttribute("disabled");
+                } else {
+                    solutionSelect.setAttribute("disabled", "true");
+                }
+            });
+
+            const unitGroup = document.getElementById('unit_group_id');
+            const unitSelect = document.getElementById('unit_id');
+
+            unitGroup.addEventListener('change', function() {
+                const groupId = this.value;
+
+                // Show loading option
+                unitSelect.innerHTML = '<option value="">Loading...</option>';
+                unitSelect.disabled = true;
+
+                if (groupId) {
+                    fetch(`/api/unit-groups/${groupId}/units`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Clear existing options
+                            unitSelect.innerHTML = '<option value="">Select Unit</option>';
+
+                            if (data.length > 0) {
+                                data.forEach(unit => {
+                                    const option = document.createElement('option');
+                                    option.value = unit.id;
+                                    option.textContent = unit.name;
+                                    unitSelect.appendChild(option);
+                                });
+                            } else {
+                                const option = document.createElement('option');
+                                option.value = '';
+                                option.textContent = 'No units available';
+                                unitSelect.appendChild(option);
+                            }
+
+                            unitSelect.disabled = false;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching units:', error);
+                            unitSelect.innerHTML = '<option value="">Failed to load units</option>';
+                            unitSelect.disabled = false;
+                        });
+                } else {
+                    unitSelect.innerHTML = '<option value="">Select Unit</option>';
+                    unitSelect.disabled = false;
+                }
+            });
+            document.getElementById('national_id').addEventListener('input', function(e) {
+                this.value = this.value.replace(/\D/g, '').slice(0, 16);
+            });
+            document.getElementById('partner_national_id').addEventListener('input', function(e) {
+                this.value = this.value.replace(/\D/g, '').slice(0, 16);
+            });
+        });
+    </script>
+
+
+    <script>
+        function showCreateCustomerModal(unitId, groupId, unitName, groupName) {
+            document.getElementById('create_unit_id').value = unitId;
+            document.getElementById('create_unit_group_id').value = groupId;
+            document.getElementById('create_unit_name').value = unitName;
+            document.getElementById('create_unit_group_name').value = groupName;
+
+            document.getElementById('create_payment_status').value = '';
+            document.getElementById('create_solution').value = '';
+            document.getElementById('create_solution').disabled = true;
+
+            new bootstrap.Modal(document.getElementById('createCustomerModal')).show();
+        }
+
+        function showDetailCustomerModal(unitId, unitName, groupName, customer) {
+            document.getElementById('detail_unit_name').textContent = unitName;
+            document.getElementById('detail_unit_group_name').textContent = groupName;
+
+            document.getElementById('detail_name').textContent = customer.name;
+            document.getElementById('detail_national_id').textContent = customer.national_id;
+            document.getElementById('detail_birth_date').textContent = customer.birth_date;
+            document.getElementById('detail_payment_status').textContent = customer.payment_status;
+            document.getElementById('detail_solution').textContent = customer.solution ?? '-';
+
+            new bootstrap.Modal(document.getElementById('detailCustomerModal')).show();
+        }
+
+        // enable solution input when reject selected
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('create_payment_status').addEventListener('change', function() {
+                const solution = document.getElementById('create_solution');
+                solution.disabled = this.value !== 'reject';
+            });
+        });
+    </script>
+
+@push('scripts')
+<script>
+function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partnerOld, unitGroup, unit, editUrl, deleteUrl) {
+    document.getElementById("modalTable").innerHTML = `
+        <tr><th>Nama</th><td>${name}</td></tr>
+        <tr><th>Nama Pasangan</th><td>${partnerName}</td></tr>
+        <tr><th>NIK</th><td>${NIK}</td></tr>
+        <tr><th>NIK Pasangan</th><td>${partnerNIK}</td></tr>
+        <tr><th>Usia</th><td>${old}</td></tr>
+        <tr><th>Usia Pasangan</th><td>${partnerOld}</td></tr>
+        <tr><th>Unit Group</th><td>${unitGroup}</td></tr>
+        <tr><th>Unit</th><td>${unit}</td></tr>
+    `;
+    document.getElementById("edit-button").setAttribute("href", editUrl);
+    document.getElementById("form-delete").setAttribute("action", deleteUrl);
+
+    const modal = new bootstrap.Modal(document.getElementById('detailCustomerModal'));
+    modal.show();
+}
+</script>
+@endpush
+
 
     @stack('scripts')
 </body>

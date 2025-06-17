@@ -2,8 +2,9 @@
 
 use App\Models\Unit;
 use App\Models\Customer;
-use App\Http\Middleware\CheckRole;
+use App\Models\UnitGroup;
 
+use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UnitController;
@@ -19,14 +20,22 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        $customers_model = Customer::class;
-        $units = Unit::with('customers')->get();
-        if ($user->role === "marketing") {
-            $customers = Customer::where([ "user_id" => $user->id ])->get();
-        } else {
-            $customers = Customer::all();
-        }
-        return view('dashboard', compact('user', 'customers', 'units'));
+
+        // Ambil semua unit lengkap dengan unit group dan customer-nya
+        $units = Unit::with('unitGroup', 'customers')->get();
+
+        // Ambil customer berdasarkan role
+        $customers = $user->role === 'marketing'
+            ? Customer::where('user_id', $user->id)->get()
+            : Customer::all();
+
+        return view('dashboard', [
+            'user' => $user,
+            'units' => $units,
+            'unit_groups' => $units->pluck('unitGroup')->unique('id')->values(), // hanya grup unik
+            'customers' => $customers,
+            'customers_model' => Customer::class,
+        ]);
     })->name('dashboard');
 
     Route::get('/marketing', [AccountController::class, 'listMarketing'])->name('marketing');
