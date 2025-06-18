@@ -25,7 +25,7 @@ class AuthController extends Controller
         ]);
 
         // Attempt to authenticate using Laravel's Auth
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard')
                 ->with('success', 'Login berhasil');

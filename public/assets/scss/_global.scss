@@ -17,13 +17,19 @@ a {
 
 // Main page wrapper
 #wrapper {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+        "sidebar topbar"
+        "sidebar content";
   #content-wrapper {
+    grid-area: content;
     background-color: $gray-100;
     width: 100%;
     overflow-x: hidden;
     #content {
-      flex: 1 0 auto;
+      // flex: 1 0 auto;
     }
   }
 }

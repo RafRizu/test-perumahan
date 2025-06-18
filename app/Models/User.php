@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'username', 'password', 'role'
+        'username', 'name', 'password', 'role'
     ];
 
     protected $hidden = [
@@ -19,5 +19,25 @@ class User extends Authenticatable
     ];
 
     public $timestamps = false;
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+    public function isMarketingTeam()
+    {
+        return $this->role === 'marketing';
+    }
+    public function isReferral()
+    {
+        return $this->role === 'referral';
+    }
+
+    public function referral()
+    {
+        return $this->hasOne(Referral::class,'user_id','id');
+    }
+
+
 
 }

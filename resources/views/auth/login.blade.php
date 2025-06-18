@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 @section('content')
 <div class="container  ">
     <!-- Outer Row -->
@@ -10,7 +10,7 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image" style="background: url('{{ asset('assets/images/login-pic.jpg') }}');"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -21,7 +21,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" name="username" class="form-control form-control-user"
-                                            id="exampleInputEmail" placeholder="Enter Username...">
+                                            id="exampleInputEmail" value="{{ old('username') }}" placeholder="Enter Username...">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control form-control-user"
@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <input type="checkbox" name="remember"class="custom-control-input" id="customCheck">
                                             <label class="custom-control-label" for="customCheck">Remember
                                                 Me</label>
                                         </div>
