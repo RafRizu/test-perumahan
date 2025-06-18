@@ -59,3 +59,20 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Quick start
+
+Several quick start options are available:
+
+-   Clone the repo: `git clone https://github.com/niveanyctra/cican`
+-   Run `cd /cican` command
+-   Run `composer install` command
+-   Run `npm install` command
+-   Run `npm run build` command
+-   Run `cp .env.example .env` command
+-   Run `php artisan key:generate` command
+-   Run `php artisan migrate` command
+-   Run `php artisan storage:link` command
+-   Run `php artisan serve` command
+-   Done
+
