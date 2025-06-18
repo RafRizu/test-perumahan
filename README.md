@@ -64,8 +64,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 Several quick start options are available:
 
--   Clone the repo: `git clone https://github.com/niveanyctra/cican`
--   Run `cd /cican` command
+-   Clone the repo: `git clone https://github.com/RafRizu/test-perumahan`
+-   Run `cd /test-perumahan` command
 -   Run `composer install` command
 -   Run `npm install` command
 -   Run `npm run build` command
