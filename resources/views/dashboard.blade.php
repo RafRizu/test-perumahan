@@ -3,9 +3,9 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mx-5 mt-3 mb-3">
         <h1 class="h3 text-gray-800 mb-0">Dashboard</h1>
-        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addCustomerModal">
+        {{-- <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addCustomerModal">
             <i class="fas fa-plus"></i> Upload Gambar
-        </button>
+        </button> --}}
     </div>
 
     @if ($errors->any())

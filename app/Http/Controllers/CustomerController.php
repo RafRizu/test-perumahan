@@ -56,6 +56,7 @@ class CustomerController extends Controller
             'unit_id' => 'required|exists:units,id',
         ]);
 
+
         // Save customer
         Customer::create([
             'name' => $validated['name'],
@@ -98,7 +99,7 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $customer = Customer::findOrFail($id);
-
+        $user = Auth::user();
         // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -121,6 +122,12 @@ class CustomerController extends Controller
             $validated['solution'] = null;
         }
         // Update data customer
+
+        if ($user->id != $customer->user_id) {
+            # code...
+            return redirect()->back()->withInput()->withErrors('Failed to update customer. Permission not granted');
+        }
+
         $updated = $customer->update([
             'name' => $validated['name'],
             'partner_name' => $validated['partner_name'],
@@ -186,6 +193,11 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         $customer = Customer::findOrFail($id);
+        $user = Auth::user();
+        if ($user->id != $customer->user_id) {
+            # code...
+            return redirect()->back()->withInput()->withErrors('Failed to update customer. Permission not granted');
+        }
         $customer->delete();
         return redirect()->back()->with('success', 'Customer deleted successfully.');
     }
