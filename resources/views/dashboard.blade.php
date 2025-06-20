@@ -42,7 +42,7 @@
                 @foreach ($units as $unit)
                 @if (!is_null($unit->top) && !is_null($unit->left))
                     @php
-                        $customer = $unit->customers?->first();
+                        $customer = $unit->customers;
                     @endphp
                     <div class="position-absolute"
                         title="{{ $unit->name }} - {{ $customer ? 'Terisi' : 'Kosong' }}"
