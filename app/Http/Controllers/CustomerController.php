@@ -15,10 +15,10 @@ class CustomerController extends Controller
         $user = Auth::user();
 
         if (in_array($user->role, ['admin', 'superadmin'])) {
-            $customers = Customer::orderBy('unit_group_id', 'asc')->get();
+            $customers = Customer::orderBy('unit_id', 'asc')->get();
             return view("lists.customers", compact("user", "customers"));
         } elseif ($user->role == 'marketing') {
-            $customers = Customer::where('user_id', $user->id)->orderBy('unit_group_id', 'asc')->get();
+            $customers = Customer::where('user_id', $user->id)->orderBy('unit_id', 'asc')->get();
             return view("lists.customers", compact("user", "customers"));
         }
     }
