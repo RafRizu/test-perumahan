@@ -51,7 +51,7 @@
                             left: {{ $unit->left }}%;
                             width: {{ $unit->width }}px;
                             height: {{ $unit->height }}px;
-                            background-color: {{ $customer ? 'green' : 'grey' }};
+                            background-color: {{ $customer ? 'red' : 'green' }};
                             border: 1px solid rgba(0,0,0,0.1);
                             z-index: 10;
                             cursor: pointer;

@@ -4,7 +4,7 @@
         <table class="table table-bordered table-hover mb-0" id="customerTable">
             <thead class="thead-light">
                 <tr>
-                    <th>No</th>
+                    {{-- <th>No</th> --}}
                     <th>Nama</th>
                     <th>Unit</th>
                     <th>Unit Group</th>
@@ -19,7 +19,7 @@
                 @endphp
                 @foreach ($customers as $c)
                     <tr class="">
-                        <td>{{ $no++ }}</td>
+                        {{-- <td>{{ $no++ }}</td> --}}
                         <td>{{ $c->name }}</td>
                         <td>{{ $c->unit->name }}</td>
                         <td>{{ $c->unit->unitGroup->name }}</td>

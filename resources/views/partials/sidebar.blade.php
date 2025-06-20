@@ -6,7 +6,9 @@
         <div class="sidebar-brand-icon">
             <i class="fas fa-home"></i>
         </div>
-        <div class="sidebar-brand-text mx-2">BUMI DAHAYU SEJAHTERA</div>
+        <div class="sidebar-brand-text mx-2">E-Perumahan</div>
+        {{-- Sementara buat pameran le --}}
+        {{-- <div class="sidebar-brand-text mx-2">Bumi Dahayu Sejahtera</div> --}}
     </a>
 
     <!-- Divider -->
@@ -35,10 +37,10 @@
     </div>
 
     <!-- Sidebar Message -->
-    <div class="sidebar-card d-none d-lg-flex">
+    {{-- <div class="sidebar-card d-none d-lg-flex">
         <p class="text-center mb-2"><strong>Demo Site</strong> this is demo site, on devlopment</p>
         <a class="btn btn-success btn-sm">Revisi</a>
-    </div>
+    </div> --}}
 
 </ul>
 <!-- End of Sidebar -->

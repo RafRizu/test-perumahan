@@ -49,7 +49,9 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Dahayu Bumi Sejahtera 2025</span>
+                        <span>Copyright &copy; UCIC 2025</span>
+                        {{-- Sementara buat pameran le --}}
+                        {{-- <span>Copyright &copy; Bumi Dahayu Sejahtera 2025</span> --}}
                     </div>
                 </div>
             </footer>
