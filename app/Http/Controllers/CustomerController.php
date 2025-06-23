@@ -120,10 +120,12 @@ class CustomerController extends Controller
             $validated['solution'] = null;
         }
         // Update data customer
-
-        if ($user->id != $customer->user_id) {
+        if ($user->role == 'marketing') {
             # code...
-            return redirect()->back()->withInput()->withErrors('Failed to update customer. Permission not granted');
+            if ($user->id != $customer->user_id) {
+                # code...
+                return redirect()->back()->withInput()->withErrors('Failed to update customer. Permission not granted');
+            }
         }
 
         $updated = $customer->update([
@@ -192,9 +194,12 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $user = Auth::user();
-        if ($user->id != $customer->user_id) {
+        if ($user->role == 'marketing') {
             # code...
-            return redirect()->back()->withInput()->withErrors('Failed to update customer. Permission not granted');
+            if ($user->id != $customer->user_id) {
+                # code...
+                return redirect()->back()->withInput()->withErrors('Failed to delete customer. Permission not granted');
+            }
         }
         $customer->delete();
         return redirect()->back()->with('success', 'Customer deleted successfully.');
