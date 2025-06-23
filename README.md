@@ -64,6 +64,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 -   Nodejs https://nodejs.org/en/download 
 -   Composer https://getcomposer.org/download/
+-   Web Server (XAMPP) https://www.apachefriends.org/download.html
 
 ## Quick start
 
