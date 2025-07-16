@@ -241,7 +241,8 @@
     </script>
     <script>
         let table = new DataTable('#customerTable', {
-            responsive: true
+            responsive: true,
+            order: [[2, 'asc']]
         });
     </script>
 @endpush
