@@ -28,8 +28,8 @@
                                 'text-uppercase',
                                 'badge',
                                 'badge-warning' => $c->status == 'ordered',
-                                'badge-success' => $c->status == 'booked',
-                                'badge-info' => $c->status == 'dp',
+                                'badge-info' => $c->status == 'booked',
+                                'badge-danger' => $c->status == 'dp',
                             ])>
                                 {{ $c->status }}
                             </span>
@@ -149,6 +149,14 @@
                         <th>Unit</th>
                         <td>07</td>
                     </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <th>Approval Status</th>
+                        <td>-</td>
+                    </tr>
                 </table>
             </div>
 
@@ -186,7 +194,9 @@
                 "unitGroup": btn.dataset.unitgroup,
                 "unit": btn.dataset.unit,
                 "deleteUrl": btn.dataset.deleteUrl,
-                "editUrl": btn.dataset.editUrl
+                "editUrl": btn.dataset.editUrl,
+                "status": btn.closest('tr').querySelector('span.badge').textContent.trim(),
+                "approvalStatus": btn.closest('tr').querySelectorAll('span.badge')[1]?.textContent.trim() ?? '-'
             }
 
             btn.addEventListener("click", () => {

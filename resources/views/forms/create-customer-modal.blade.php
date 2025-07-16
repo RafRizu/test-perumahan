@@ -6,7 +6,7 @@
           @csrf
           <div class="modal-header">
             <h5 class="modal-title">Tambah Customer</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> --}}
           </div>
           <div class="modal-body">
             <!-- Info Unit -->
@@ -75,7 +75,7 @@
 
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
           </div>
         </form>
       </div>

@@ -211,7 +211,7 @@
 
 @push('scripts')
 <script>
-function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partnerOld, unitGroup, unit, editUrl, deleteUrl) {
+function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partnerOld, unitGroup, unit, status, approvalStatus, editUrl, deleteUrl) {
     document.getElementById("modalTable").innerHTML = `
         <tr><th>Nama</th><td>${name}</td></tr>
         <tr><th>Nama Pasangan</th><td>${partnerName}</td></tr>
@@ -221,6 +221,8 @@ function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partne
         <tr><th>Usia Pasangan</th><td>${partnerOld}</td></tr>
         <tr><th>Unit Group</th><td>${unitGroup}</td></tr>
         <tr><th>Unit</th><td>${unit}</td></tr>
+        <tr><th>Status</th><td>${status}</td></tr>
+        <tr><th>Approval Status</th><td>${approvalStatus}</td></tr>
     `;
     document.getElementById("edit-button").setAttribute("href", editUrl);
     document.getElementById("form-delete").setAttribute("action", deleteUrl);

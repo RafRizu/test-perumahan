@@ -40,53 +40,79 @@
                 style="position: absolute; width: 100%; max-width: 901px; height: 100%; top:0; left: 50%; transform: translateX(-50%);">
                 {{-- Overlay for each unit --}}
                 @foreach ($units as $unit)
-                @if (!is_null($unit->top) && !is_null($unit->left))
-                    @php
-                        $customer = $unit->customers;
-                    @endphp
-                    <div class="position-absolute"
-                        title="{{ $unit->name }} - {{ $customer ? 'Terisi' : 'Kosong' }}"
-                        style="
-                            top: {{ $unit->top }}%;
-                            left: {{ $unit->left }}%;
-                            width: {{ $unit->width }}px;
-                            height: {{ $unit->height }}px;
-                            background-color: {{ $customer ? 'red' : 'green' }};
-                            border: 1px solid rgba(0,0,0,0.1);
-                            z-index: 10;
-                            cursor: pointer;
-                            color: white;
-                            transform: translate(-50%,-50%);
-                            display: inline-flex;
-                            justify-content: center;
-                            align-items: center;
-                            border-radius: 50%;
-                        "
-                        @if ($customer)
-                            onclick="showDetailCustomerModal(
-                                '{{ e($customer->name) }}',
-                                '{{ e($customer->partner_name) }}',
-                                '{{ e($customer->national_id) }}',
-                                '{{ e($customer->partner_national_id) }}',
-                                '{{ \Carbon\Carbon::parse($customer->birth_date)->age }} Tahun',
-                                '{{ $customer->partner_birth_date ? \Carbon\Carbon::parse($customer->partner_birth_date)->age . ' Tahun' : '-' }}',
-                                '{{ e($unit->unitGroup->name) }}',
-                                '{{ e($unit->name) }}',
-                                '{{ route('customers.edit', $customer->id) }}',
-                                '{{ route('customers.destroy', $customer->id) }}'
-                            )"
-                        @else
-                            onclick="showCreateCustomerModal(
-                                {{ $unit->id }},
-                                {{ $unit->unit_group_id }},
-                                '{{ e($unit->name) }}',
-                                '{{ e($unit->unitGroup->name) }}'
-                            )"
-                        @endif
-                    >
-                    </div>
-                @endif
-            @endforeach
+                    @if (!is_null($unit->top) && !is_null($unit->left))
+                        @php
+                            $customer = $unit->customers;
+                            $color = 'green';
+                            $gradient = '';
+                            if ($customer) {
+                                switch ($customer->status) {
+                                    case 'booked':
+                                        $color = 'yellow';
+                                        break;
+                                    case 'ordered':
+                                        $color = '#17a2b8';
+                                        break;
+                                    case 'dp':
+                                        $color = 'red';
+                                        break;
+                                    default:
+                                        $color = 'gray';
+                                        break;
+                                }
+
+                                // if ($customer->approval_status === 'pending') {
+                                //     $gradient = 'linear-gradient(90deg, lightgray 10%, ' . $color . ' 100%)';
+                                // } elseif ($customer->approval_status === 'approved') {
+                                //     $gradient = 'linear-gradient(90deg, #90ee90 10%, ' . $color . ' 100%)';
+                                // }
+                            }
+                        @endphp
+                        <div class="position-absolute"
+                            title="{{ $unit->name }} - {{ $customer ? ucfirst($customer->status) : 'Kosong' }}"
+                            style="
+                                top: {{ $unit->top }}%;
+                                left: {{ $unit->left }}%;
+                                width: {{ $unit->width }}px;
+                                height: {{ $unit->height }}px;
+                                background: {{ $gradient ? $gradient : $color }};
+                                border: 1px solid rgba(0,0,0,0.1);
+                                z-index: 10;
+                                cursor: pointer;
+                                color: white;
+                                transform: translate(-50%,-50%);
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 50%;
+                            "
+                            @if ($customer)
+                                onclick="showDetailCustomerModal(
+                                    '{{ e($customer->name) }}',
+                                    '{{ e($customer->partner_name) }}',
+                                    '{{ e($customer->national_id) }}',
+                                    '{{ e($customer->partner_national_id) }}',
+                                    '{{ \Carbon\Carbon::parse($customer->birth_date)->age }} Tahun',
+                                    '{{ $customer->partner_birth_date ? \Carbon\Carbon::parse($customer->partner_birth_date)->age . ' Tahun' : '-' }}',
+                                    '{{ e($unit->unitGroup->name) }}',
+                                    '{{ e($unit->name) }}',
+                                    '{{ e($customer->status) }}',
+                                    '{{ e($customer->approval_status) }}',
+                                    '{{ route('customers.edit', $customer->id) }}',
+                                    '{{ route('customers.destroy', $customer->id) }}'
+                                )"
+                            @else
+                                onclick="showCreateCustomerModal(
+                                    {{ $unit->id }},
+                                    {{ $unit->unit_group_id }},
+                                    '{{ e($unit->name) }}',
+                                    '{{ e($unit->unitGroup->name) }}'
+                                )"
+                            @endif
+                        >
+                        </div>
+                    @endif
+                @endforeach
 
 
 
