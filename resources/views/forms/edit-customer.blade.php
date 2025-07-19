@@ -74,7 +74,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-6 mb-3">
+                        {{-- <div class="col-12 col-md-6 mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-control" id="status" name="status" required>
                                 <option value="">Select Status</option>
@@ -85,7 +85,7 @@
                                     }}>Order
                                 </option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-12 col-md-6 mb-3" id="solution_box" style="display: none;">
                         <label for="solution" class="form-label">Solution</label>
