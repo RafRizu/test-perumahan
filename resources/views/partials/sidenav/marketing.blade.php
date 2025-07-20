@@ -9,9 +9,9 @@
     </a>
 </li>
 
-<li class="nav-item {{ (Route::is('unit-group.index')) ? 'active' : '' }}">
+{{-- <li class="nav-item {{ (Route::is('unit-group.index')) ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('unit-group.index') }}">
         <i class="fas fa-fw fa-book"></i>
         <span>Units</span>
     </a>
-</li>
+</li> --}}

@@ -13,7 +13,7 @@ class Unit extends Model
 
     public function customers()
     {
-        return $this->hasMany(Customer::class);
+        return $this->hasOne(Customer::class);
     }
     public function unitGroup()
     {

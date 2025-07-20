@@ -13,7 +13,6 @@ class UnitSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $units = [
             ['unit_group_id' => 1, 'start' => 1, 'end' => 8],
             ['unit_group_id' => 2, 'start' => 1, 'end' => 18],
@@ -48,14 +47,38 @@ class UnitSeeder extends Seeder
             ['unit_group_id' => 27, 'start' => 1, 'end' => 5],
 
         ];
-        $name = 'Unit - ';
-        foreach ($units as $unit) {
+
+        // WARN: "Ukuran si tiap kotak bukan nya fixed yaa? yaudah deh" - chad zan
+        $unitSize = 15; // ukuran tiap kotak unit
+        $gap = 3; // jarak antar kotak
+        $startTop = 100; // titik Y awal
+        $startLeft = 700; // titik X awal
+
+        $id = 1;
+        foreach ($units as $index => $unit) {
+            $row = 0;
+            $col = 0;
+
             for ($i = $unit['start']; $i <= $unit['end']; $i++) {
-                Unit::firstOrCreate([
+                // NOTE: Dibagi untuk mendapatkan persentase, berdasarkan ukuran gambar 901x1278
+                // Hitung nilai kanan kiri, dibagi ukuran (panjang/tinggi) kemudian di kali 100
+                $left = ($startLeft + ($col * ($unitSize + $gap))) / 901 * 100;
+                $top = ($startTop + ($index * 20)) / 1279 * 100; // jarak antar baris grup
+
+                Unit::updateOrCreate([
+                    'id' => $id++,
                     'unit_group_id' => $unit['unit_group_id'],
-                    'name' => $name . $i,
+                    'name' => 'Unit - ' . $i,
+                ], [
+                    'top' => $top,
+                    'left' => $left,
+                    'width' => $unitSize,
+                    'height' => $unitSize,
                 ]);
+
+                $col++;
             }
         }
     }
+
 }
