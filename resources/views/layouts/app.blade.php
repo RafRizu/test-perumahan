@@ -185,15 +185,21 @@
             new bootstrap.Modal(document.getElementById('createCustomerModal')).show();
         }
 
-        function showDetailCustomerModal(unitId, unitName, groupName, customer) {
-            document.getElementById('detail_unit_name').textContent = unitName;
-            document.getElementById('detail_unit_group_name').textContent = groupName;
+        function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partnerOld, unitGroup, unit, editUrl, deleteUrl) {
+            document.getElementById('detail_unit_name').value = unit;
+            document.getElementById('detail_unit_group_name').value = unitGroup;
 
-            document.getElementById('detail_name').textContent = customer.name;
-            document.getElementById('detail_national_id').textContent = customer.national_id;
-            document.getElementById('detail_birth_date').textContent = customer.birth_date;
-            document.getElementById('detail_payment_status').textContent = customer.payment_status;
-            document.getElementById('detail_solution').textContent = customer.solution ?? '-';
+            document.getElementById('detail_name').value = name;
+            document.getElementById('detail_national_id').value = NIK;
+            document.getElementById('detail_partner_name').value = partnerName;
+            document.getElementById('detail_partner_national_id').value = partnerNIK;
+            document.getElementById('detail_birth_date').value = old;
+            document.getElementById('detail_partner_birth_date').value = partnerOld;
+            document.getElementById('detail_payment_status').value = partnerName;
+            document.getElementById('detail_solution').value = partnerName ?? '-';
+
+            document.getElementById('detail_old').textContent = new Date().getFullYear() - new Date(old).getFullYear() + " Tahun";
+            document.getElementById('detail_partner_old').textContent = new Date().getFullYear() - new Date(partnerOld).getFullYear() + " Tahun";
 
             new bootstrap.Modal(document.getElementById('detailCustomerModal')).show();
         }
@@ -209,23 +215,23 @@
 
 @push('scripts')
 <script>
-function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partnerOld, unitGroup, unit, editUrl, deleteUrl) {
-    document.getElementById("modalTable").innerHTML = `
-        <tr><th>Nama</th><td>${name}</td></tr>
-        <tr><th>Nama Pasangan</th><td>${partnerName}</td></tr>
-        <tr><th>NIK</th><td>${NIK}</td></tr>
-        <tr><th>NIK Pasangan</th><td>${partnerNIK}</td></tr>
-        <tr><th>Usia</th><td>${old}</td></tr>
-        <tr><th>Usia Pasangan</th><td>${partnerOld}</td></tr>
-        <tr><th>Unit Group</th><td>${unitGroup}</td></tr>
-        <tr><th>Unit</th><td>${unit}</td></tr>
-    `;
-    document.getElementById("edit-button").setAttribute("href", editUrl);
-    document.getElementById("form-delete").setAttribute("action", deleteUrl);
-
-    const modal = new bootstrap.Modal(document.getElementById('detailCustomerModal'));
-    modal.show();
-}
+// function showDetailCustomerModal(name, partnerName, NIK, partnerNIK, old, partnerOld, unitGroup, unit, editUrl, deleteUrl) {
+//     document.getElementById("modalTable").innerHTML = `
+//         <tr><th>Nama</th><td>${name}</td></tr>
+//         <tr><th>Nama Pasangan</th><td>${partnerName}</td></tr>
+//         <tr><th>NIK</th><td>${NIK}</td></tr>
+//         <tr><th>NIK Pasangan</th><td>${partnerNIK}</td></tr>
+//         <tr><th>Usia</th><td>${old}</td></tr>
+//         <tr><th>Usia Pasangan</th><td>${partnerOld}</td></tr>
+//         <tr><th>Unit Group</th><td>${unitGroup}</td></tr>
+//         <tr><th>Unit</th><td>${unit}</td></tr>
+//     `;
+//     document.getElementById("edit-button").setAttribute("href", editUrl);
+//     document.getElementById("form-delete").setAttribute("action", deleteUrl);
+//
+//     const modal = new bootstrap.Modal(document.getElementById('detailCustomerModal'));
+//     modal.show();
+// }
 </script>
 @endpush
 

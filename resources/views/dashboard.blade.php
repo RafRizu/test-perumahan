@@ -68,8 +68,8 @@
                                 '{{ e($customer->partner_name) }}',
                                 '{{ e($customer->national_id) }}',
                                 '{{ e($customer->partner_national_id) }}',
-                                '{{ \Carbon\Carbon::parse($customer->birth_date)->age }} Tahun',
-                                '{{ $customer->partner_birth_date ? \Carbon\Carbon::parse($customer->partner_birth_date)->age . ' Tahun' : '-' }}',
+                                '{{ $customer->birth_date }}',
+                                '{{ $customer->partner_birth_date }}',
                                 '{{ e($unit->unitGroup->name) }}',
                                 '{{ e($unit->name) }}',
                                 '{{ route('customers.edit', $customer->id) }}',
@@ -98,42 +98,6 @@
 
     @include('partials.data.customers')
     @push('scripts')
-        <script>
-            {{-- NOTE: INI HANYA UNTUK DEBUGING DAN MANCARI TITIK UNIT, HAPUS NANTI --}}
-            const debugDiv = document.getElementById('debug-div');
-            const bigArray = [];
-
-            debugDiv.addEventListener('click', function(event) {
-                // Mendapatkan ukuran elemen
-                const rect = debugDiv.getBoundingClientRect();
-                const divWidth = rect.width;
-                const divHeight = rect.height;
-
-                // Mendapatkan posisi klik relatif terhadap elemen
-                const clickX = event.clientX - rect.left;
-                const clickY = event.clientY - rect.top;
-
-                // Menghitung persentase
-                const percentageX = (clickX / divWidth) * 100;
-                const percentageY = (clickY / divHeight) * 100;
-
-                bigArray.push([percentageX, percentageY]);
-
-                // Simpan ke clipboard
-                navigator.clipboard.writeText(JSON.stringify(bigArray));
-
-                // Menampilkan hasil
-                console.log(`${percentageX.toFixed(2)}%, ${percentageY.toFixed(2)}%`);
-                console.log(bigArray.length);
-            });
-
-            const customCursor = document.querySelector('#custom-cursor');
-
-            document.addEventListener('mousemove', (e) => {
-                customCursor.style.left = `${e.pageX}px`; // Set the horizontal position
-                customCursor.style.top = `${e.pageY}px`; // Set the vertical position
-            });
-        </script>
     @endpush
 
 @endsection

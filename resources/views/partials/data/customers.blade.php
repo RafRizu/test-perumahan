@@ -106,50 +106,88 @@
 <!-- Modal Detail Customer -->
 <div class="modal fade" id="detailCustomerModal" tabindex="-1" role="dialog"
     aria-labelledby="detailCustomerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content shadow">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header">
                 <h5 class="modal-title font-weight-bold" id="detailCustomerModalLabel">Detail Customer</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body">
-                <table class="table table-bordered table-sm" id="modalTable">
-                    <tr>
-                        <th>Nama</th>
-                        <td>Andi Saputra</td>
-                    </tr>
-                    <tr>
-                        <th>Nama Pasangan</th>
-                        <td>Siti Nurhaliza</td>
-                    </tr>
-                    <tr>
-                        <th>NIK</th>
-                        <td>1234567890123456</td>
-                    </tr>
-                    <tr>
-                        <th>NIK Pasangan</th>
-                        <td>6543210987654321</td>
-                    </tr>
-                    <tr>
-                        <th>Usia</th>
-                        <td>30 tahun</td>
-                    </tr>
-                    <tr>
-                        <th>Usia Pasangan</th>
-                        <td>28 tahun</td>
-                    </tr>
-                    <tr>
-                        <th>Unit Group</th>
-                        <td>A1</td>
-                    </tr>
-                    <tr>
-                        <th>Unit</th>
-                        <td>07</td>
-                    </tr>
-                </table>
+                <!-- Info Unit -->
+                <input type="hidden" name="unit_id" id="detail_unit_id">
+                <input type="hidden" name="unit_group_id" id="detail_unit_group_id">
+
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label>Unit Group</label>
+                        <input type="text" class="form-control" id="detail_unit_group_name" disabled>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label>Unit</label>
+                        <input type="text" class="form-control" id="detail_unit_name" disabled>
+                    </div>
+                </div>
+
+                <!-- Form Input -->
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label>Nama Customer</label>
+                        <input type="text" name="name" class="form-control" id="detail_name"required>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label>Nomor KTP</label>
+                        <input type="text" name="national_id" class="form-control" id="detail_national_id" required maxlength="16">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label>Nama Pasangan</label>
+                        <input type="text" name="partner_name" class="form-control" id="detail_partner_name">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label>Nomor KTP Pasangan</label>
+                        <input type="text" name="partner_national_id" class="form-control" id="detail_partner_national_id" maxlength="16">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label>Umur / Tanggal Lahir</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="detail_old">9 tahun</span>
+                            </div>
+                            <input type="date" name="birth_date" class="form-control" id="detail_birth_date" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label>Tanggal Lahir Pasangan</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="detail_partner_old">0 tahun</span>
+                            </div>
+                            <input type="date" name="partner_birth_date" class="form-control" id="detail_partner_birth_date">
+                        </div>
+                    </div>
+                    <input type="hidden" name="status" value="ordered">
+                    <div class="col-md-6 mb-2">
+                        <label>Status Pembayaran</label>
+                        <select name="payment_status" id="detail_payment_status" class="form-control" required>
+                            <option value="">Pilih</option>
+                            <option value="reject">Reject</option>
+                            <option value="qualify">Qualify</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label>Solusi (jika reject)</label>
+                        <select name="solution" id="detail_solution" class="form-control" disabled>
+                            <option value="">Pilih Solusi</option>
+                            <option value="Takeover Bank">Takeover Bank</option>
+                            <option value="Clearing Payment">Clearing Payment</option>
+                            <option value="Change Credit Name">Change Credit Name</option>
+                            <option value="Repayment">Repayment</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
